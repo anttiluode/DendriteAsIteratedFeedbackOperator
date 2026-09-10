@@ -1,0 +1,80 @@
+{
+  "model": {
+    "compartments": 25,
+    "branch_len": 12,
+    "dt": 0.5
+  },
+  "G0_stability": {
+    "step_spectral_radius": 0.979186513089701,
+    "passes": true
+  },
+  "G1_iterated_mode_selection": {
+    "initial_modal_effective_dimension": 10.005349911780453,
+    "final_modal_effective_dimension": 1.0194319035177686,
+    "final_abs_cosine_with_slowest_mode": 0.9986304013810646,
+    "snapshots": [
+      {
+        "step": 0,
+        "norm": 0.45454545454545453,
+        "slow_mode_abs_cosine": 0.3085535095096268,
+        "modal_effective_dimension": 10.005349911780453
+      },
+      {
+        "step": 20,
+        "norm": 0.21905832943890294,
+        "slow_mode_abs_cosine": 0.5179995681979462,
+        "modal_effective_dimension": 3.741210158919412
+      },
+      {
+        "step": 80,
+        "norm": 0.048298057662150666,
+        "slow_mode_abs_cosine": 0.7073165604448486,
+        "modal_effective_dimension": 2.8299244914205404
+      },
+      {
+        "step": 240,
+        "norm": 0.00120888339981521,
+        "slow_mode_abs_cosine": 0.9434389169153385,
+        "modal_effective_dimension": 1.5136476935232988
+      },
+      {
+        "step": 600,
+        "norm": 5.652147435487637e-07,
+        "slow_mode_abs_cosine": 0.9986304013810646,
+        "modal_effective_dimension": 1.0194319035177686
+      }
+    ]
+  },
+  "G2_grounded_recursion": {
+    "alpha": 0.08,
+    "analytic_fixed_point_relative_error": 9.990699565637054e-16,
+    "grounded_A_vs_B_fixed_point_cosine": 1.837680076850075e-06,
+    "ungrounded_A_vs_B_late_state_cosine": 0.9990879072598963
+  },
+  "G3_not_a_scalar_weight": {
+    "branch_kernel_cosine": 0.983234941455107,
+    "best_scalar_map": 0.3053924915955483,
+    "relative_residual_after_best_scalar_fit": 0.18234322005978834,
+    "peak_step_A": 79,
+    "peak_step_B": 93,
+    "peak_value_A": 0.002825504472453971,
+    "peak_value_B": 0.0009231670084269171
+  },
+  "G4_local_edit_global_low_rank": {
+    "edited_edge": [
+      18,
+      19
+    ],
+    "delta_conductance": 0.18,
+    "deltaH_effective_rank": 1.0,
+    "top_singular_value_fraction": 0.9999999999999639,
+    "dense_fraction_above_2pct_peak": 0.1456,
+    "singular_values_first5": [
+      0.12838896629143695,
+      6.189239592105918e-16,
+      5.95107068449644e-16,
+      3.9192856879335486e-16,
+      3.780737294422347e-16
+    ]
+  }
+}
