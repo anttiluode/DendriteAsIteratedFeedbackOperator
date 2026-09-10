@@ -1,0 +1,207 @@
+{
+  "gate": 14,
+  "question": "Does a receipt-sized coherent cable region recover a finite grounded natural-length fixed point on the real morphology?",
+  "real_morphology": {
+    "dendritic_nodes_including_soma_root": 12514,
+    "total_dendritic_cable_um": 20742.410466608977,
+    "selected_input_tip": 10532,
+    "selected_input_path_nodes": 750,
+    "selected_input_path_length_um": 1242.169057660336,
+    "branch_nodes": 99
+  },
+  "baseline_operator": {
+    "omega_star_rad_s": 175.86867504846916,
+    "peak_is_interior_to_frequency_sweep": true,
+    "target_fraction": 0.9937649507008934,
+    "target_gain": 898305.8737733648
+  },
+  "receipt_field": {
+    "peak_node": 10532,
+    "peak_is_terminal_tip": true,
+    "support_rule": "contiguous component on the input path with normalized |forward|*|return| >= threshold",
+    "thresholds_fixed_before_sweeps": [0.9, 0.5, 0.1],
+    "path_integrated_receipt_mass": 1.3639363161475066e+17
+  },
+  "supports": [
+    {
+      "relative_receipt_threshold": 0.9,
+      "support_nodes": 26,
+      "support_first_node": 10507,
+      "support_last_node": 10532,
+      "support_cable_um": 42.31090786660717,
+      "support_fraction_of_input_path": 0.034062117073098794,
+      "support_fraction_of_path_receipt_mass": 0.08678932747039068,
+      "purity_only": {
+        "fixed_point_scale": 5.0,
+        "fixed_point_is_interior": false,
+        "broad_best_scale": 5.0,
+        "broad_best_is_interior": false,
+        "target_fraction": 0.9956779270042841,
+        "target_gain_vs_baseline": 0.718646522003999,
+        "walk_steps": 30
+      },
+      "grounded": [
+        {
+          "observer_noise_fraction_of_baseline_target_power": 0.001,
+          "fixed_point_scale": 5.0,
+          "fixed_point_is_interior": false,
+          "broad_best_scale": 5.0,
+          "broad_best_is_interior": false,
+          "fixed_point_score": 159.30873572621067,
+          "target_fraction": 0.9956779270042841,
+          "target_gain_vs_baseline": 0.718646522003999,
+          "walk_steps": 30
+        },
+        {
+          "observer_noise_fraction_of_baseline_target_power": 0.01,
+          "fixed_point_scale": 0.2,
+          "fixed_point_is_interior": false,
+          "broad_best_scale": 0.2,
+          "broad_best_is_interior": false,
+          "fixed_point_score": 64.19289669093062,
+          "target_fraction": 0.9933127574694949,
+          "target_gain_vs_baseline": 1.0632412451598334,
+          "walk_steps": 30
+        },
+        {
+          "observer_noise_fraction_of_baseline_target_power": 0.03,
+          "fixed_point_scale": 0.2,
+          "fixed_point_is_interior": false,
+          "broad_best_scale": 0.2,
+          "broad_best_is_interior": false,
+          "fixed_point_score": 30.057454361321874,
+          "target_fraction": 0.9933127574694949,
+          "target_gain_vs_baseline": 1.0632412451598334,
+          "walk_steps": 30
+        }
+      ],
+      "reference_1pct_operator_change": {
+        "fixed_point_scale": 0.2,
+        "support_total_cable_after_scale_um": 8.462181573321434,
+        "target_transfer_phase_shift_radians": 0.0022617488032957173,
+        "five_tone_best_scalar_residual": 0.0065001362559369506
+      }
+    },
+    {
+      "relative_receipt_threshold": 0.5,
+      "support_nodes": 200,
+      "support_first_node": 10333,
+      "support_last_node": 10532,
+      "support_cable_um": 356.60436789133325,
+      "support_fraction_of_input_path": 0.28708199233605824,
+      "support_fraction_of_path_receipt_mass": 0.5356956006415152,
+      "purity_only": {
+        "fixed_point_scale": 5.0,
+        "fixed_point_is_interior": false,
+        "broad_best_scale": 5.0,
+        "broad_best_is_interior": false,
+        "target_fraction": 0.9996650382933125,
+        "target_gain_vs_baseline": 0.0469170000596919,
+        "walk_steps": 30
+      },
+      "grounded": [
+        {
+          "observer_noise_fraction_of_baseline_target_power": 0.001,
+          "fixed_point_scale": 1.5360027779971814,
+          "fixed_point_is_interior": true,
+          "broad_best_scale": 1.5360027779971814,
+          "broad_best_is_interior": true,
+          "fixed_point_score": 160.2680817133395,
+          "target_fraction": 0.99594924168162,
+          "target_gain_vs_baseline": 0.6784829083195605,
+          "walk_steps": 8
+        },
+        {
+          "observer_noise_fraction_of_baseline_target_power": 0.01,
+          "fixed_point_scale": 0.6170338627200096,
+          "fixed_point_is_interior": true,
+          "broad_best_scale": 0.6170338627200096,
+          "broad_best_is_interior": true,
+          "fixed_point_score": 68.2447370237728,
+          "target_fraction": 0.9913648811279054,
+          "target_gain_vs_baseline": 1.2971913440148672,
+          "walk_steps": 9
+        },
+        {
+          "observer_noise_fraction_of_baseline_target_power": 0.03,
+          "fixed_point_scale": 0.2,
+          "fixed_point_is_interior": false,
+          "broad_best_scale": 0.2,
+          "broad_best_is_interior": false,
+          "fixed_point_score": 43.53685930930099,
+          "target_fraction": 0.9878807462646721,
+          "target_gain_vs_baseline": 1.6743497752376355,
+          "walk_steps": 30
+        }
+      ],
+      "reference_1pct_operator_change": {
+        "fixed_point_scale": 0.6170338627200096,
+        "support_total_cable_after_scale_um": 220.0369705828167,
+        "target_transfer_phase_shift_radians": 0.009852862663971985,
+        "five_tone_best_scalar_residual": 0.030484858383473225
+      }
+    },
+    {
+      "relative_receipt_threshold": 0.1,
+      "support_nodes": 627,
+      "support_first_node": 8886,
+      "support_last_node": 10532,
+      "support_cable_um": 1098.7942126969447,
+      "support_fraction_of_input_path": 0.8845770275155281,
+      "support_fraction_of_path_receipt_mass": 0.9810024752453084,
+      "purity_only": {
+        "fixed_point_scale": 5.0,
+        "fixed_point_is_interior": false,
+        "broad_best_scale": 5.0,
+        "broad_best_is_interior": false,
+        "target_fraction": 0.9999984208724929,
+        "target_gain_vs_baseline": 0.00008712409793401729,
+        "walk_steps": 30
+      },
+      "grounded": [
+        {
+          "observer_noise_fraction_of_baseline_target_power": 0.001,
+          "fixed_point_scale": 1.1746189430880192,
+          "fixed_point_is_interior": true,
+          "broad_best_scale": 1.1746189430880192,
+          "broad_best_is_interior": true,
+          "fixed_point_score": 157.29692042119626,
+          "target_fraction": 0.9959605570750177,
+          "target_gain_vs_baseline": 0.6591544873854809,
+          "walk_steps": 3
+        },
+        {
+          "observer_noise_fraction_of_baseline_target_power": 0.01,
+          "fixed_point_scale": 0.8513399225207845,
+          "fixed_point_is_interior": true,
+          "broad_best_scale": 0.8513399225207845,
+          "broad_best_is_interior": true,
+          "fixed_point_score": 70.30019215908656,
+          "target_fraction": 0.9907837348340556,
+          "target_gain_vs_baseline": 1.4252713293934671,
+          "walk_steps": 3
+        },
+        {
+          "observer_noise_fraction_of_baseline_target_power": 0.03,
+          "fixed_point_scale": 0.7247796636776956,
+          "fixed_point_is_interior": true,
+          "broad_best_scale": 0.7247796636776956,
+          "fixed_point_score": 46.81582639298807,
+          "broad_best_is_interior": true,
+          "target_fraction": 0.9869114446046312,
+          "target_gain_vs_baseline": 1.924719481753366,
+          "walk_steps": 6
+        }
+      ],
+      "reference_1pct_operator_change": {
+        "fixed_point_scale": 0.8513399225207845,
+        "support_total_cable_after_scale_um": 935.4473799037032,
+        "target_transfer_phase_shift_radians": 0.011978331177456773,
+        "five_tone_best_scalar_residual": 0.03544597423284992
+      }
+    }
+  ],
+  "interpretation_rule": "An interior result counts only if the local neighbour walk and the broad grid optimum are both interior. Boundary-seeking results remain failures for that structural coordinate.",
+  "sigh_bridge": "Gate 13 showed that a point receipt can name a discretization interval too small to be a meaningful growth coordinate. Gate 14 asks whether the receipt has a spatial support whose coherent metric change can itself approach a structural fixed point.",
+  "claim_boundary": "The morphology is real and the support is selected from the baseline transfer field, but the quasi-active membrane and the growth/search rule are phenomenological. No literal waveguide wavelength, bAP gradient, or biological structural-plasticity mechanism is claimed."
+}
