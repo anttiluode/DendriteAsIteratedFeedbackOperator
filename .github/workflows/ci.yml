@@ -27,12 +27,14 @@ jobs:
       - run: python gate13_real_morphology_length.py
       - run: python gate14_receipt_support_growth.py
       - run: python gate15_support_response.py
+      - run: python gate16_microscale_resampling.py
       - uses: actions/upload-artifact@v4
         with:
-          name: gate11-15-receipts-py${{ matrix.python-version }}
+          name: gate11-16-receipts-py${{ matrix.python-version }}
           path: |
             results/gate11_ais_receipt.json
             results/gate12_natural_length.json
             results/gate13_real_morphology_length.json
             results/gate14_receipt_support_growth.json
             results/gate15_support_response.json
+            results/gate16_microscale_resampling.json
