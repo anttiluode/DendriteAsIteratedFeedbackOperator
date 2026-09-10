@@ -28,9 +28,10 @@ jobs:
       - run: python gate14_receipt_support_growth.py
       - run: python gate15_support_response.py
       - run: python gate16_microscale_resampling.py
+      - run: python gate17_geometry_modes.py
       - uses: actions/upload-artifact@v4
         with:
-          name: gate11-16-receipts-py${{ matrix.python-version }}
+          name: gate11-17-receipts-py${{ matrix.python-version }}
           path: |
             results/gate11_ais_receipt.json
             results/gate12_natural_length.json
@@ -38,3 +39,4 @@ jobs:
             results/gate14_receipt_support_growth.json
             results/gate15_support_response.json
             results/gate16_microscale_resampling.json
+            results/gate17_geometry_modes.json
