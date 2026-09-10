@@ -1,0 +1,54 @@
+{
+  "model": {
+    "dendritic_compartments": 25,
+    "total_compartments_with_AIS": 26,
+    "input_site": 12,
+    "soma": 0,
+    "ais": 25
+  },
+  "select_purify": {
+    "omega_star": 0.12646735579868754,
+    "peak_gain_to_AIS": 0.011827554656223262,
+    "input_target_energy_fraction": 0.2,
+    "AIS_target_energy_fraction": 0.9763542577280313,
+    "enrichment_over_input": 4.881771288640156,
+    "tones": [
+      0.0,
+      0.044263574529540634,
+      0.12646735579868754,
+      0.3161683894967188,
+      0.7588041347921253
+    ]
+  },
+  "small_signal_reciprocity": {
+    "matrix_relative_error_H_minus_HT": 1.7605975622495353e-16,
+    "pairwise_forward_reverse_relative_error": 8.317375438333867e-17
+  },
+  "commit_return_receipt": {
+    "receipt_relative_to_small_return": 0.7763399836053277,
+    "interpretation": "The event-conditioned return differs because it traverses a post-event conductance state. Each frozen state remains reciprocal."
+  },
+  "bind_write": {
+    "write_permission": 1.0,
+    "joint_eligibility_receipt_score": 0.013135855189931192,
+    "parent_site": 11,
+    "write_site": 12,
+    "delta_g": 0.001576302622791743,
+    "resolvent_s2_over_s1": 2.4257842329529888e-12
+  },
+  "replay_after_fast_state_wipe": {
+    "fast_state": "exactly absent from the frequency-domain replay",
+    "pre_AIS_gain": 0.011827554656223262,
+    "post_AIS_gain": 0.011831091936802575,
+    "relative_gain_change": 0.0002990711674666999,
+    "pre_target_fraction": 0.9763542577280313,
+    "post_target_fraction": 0.9763477890241419,
+    "target_fraction_change": -6.46870388942844e-06
+  },
+  "controls": {
+    "no_write_permission_operator_change": 0.0,
+    "receipt_is_not_learning": true,
+    "learning_requires_persistent_edge_edit": true
+  },
+  "claim_boundary": "This gate demonstrates a closed toy operator loop with quasi-active dendritic purification, a reciprocal small-signal baseline, an AIS-state-conditioned return receipt, a receipt-and-eligibility-gated local structural edit, and changed replay after fast-state erasure. It is not a fitted AIS/bAP/STDP model and does not show that biological bAPs compute an adjoint or exact gradient."
+}
