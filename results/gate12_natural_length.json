@@ -1,0 +1,51 @@
+{
+  "model": {
+    "parent_site": 11,
+    "length_site": 12,
+    "baseline_axial_conductance": 0.72,
+    "baseline_capacitance": 2.2,
+    "baseline_leak": 0.05225,
+    "geometry_rule": "L->sL at fixed radius/density: g_ax->g_ax/s, C/leak/quasi-active membrane admittance -> s times local value"
+  },
+  "fixed_target": {
+    "omega_star": 0.12646735579868754,
+    "tones": [0.0, 0.044263574529540634, 0.12646735579868754, 0.3161683894967188, 0.7588041347921253],
+    "baseline_target_fraction": 0.9763542577280313,
+    "baseline_target_gain": 0.011827554656223262,
+    "baseline_target_power": 0.00013989104914594857,
+    "baseline_off_target_power": 3.387938003115488e-06
+  },
+  "purity_only_attack": {
+    "broad_sweep_max_scale": 50.0,
+    "broad_best_scale": 50.0,
+    "broad_best_is_at_upper_boundary": true,
+    "best_target_fraction": 0.9845646561198266,
+    "best_target_gain_vs_baseline": 0.0023347278714293965,
+    "local_iteration_scale": 49.99999999999999,
+    "local_iteration_hit_upper_bound": true,
+    "local_iteration_target_fraction": 0.9845646561198266,
+    "local_iteration_target_gain_vs_baseline": 0.0023347278714293965,
+    "interpretation": "Purity alone rewards isolation: the target fraction rises while absolute transmission collapses. There is no useful finite natural length under this ungrounded objective."
+  },
+  "grounded_bounded_observer": {
+    "score": "target_power / (off_target_power + observer_noise_floor)",
+    "rows": [
+      {"observer_noise_fraction_of_baseline_target_power": 0.001, "noise_floor_power": 1.3989104914594858e-07, "broad_best_scale": 1.5312374238985895, "broad_best_is_interior": true, "fixed_point_scale": 1.533314359674418, "fixed_point_score": 40.89346693751277, "dscore_dlogL": -0.0007751231372310485, "target_fraction": 0.9779257603193097, "target_gain": 0.008623211497570317, "target_gain_vs_baseline": 0.7290781356087899, "iterations": 20},
+      {"observer_noise_fraction_of_baseline_target_power": 0.003, "noise_floor_power": 4.196731474378457e-07, "broad_best_scale": 1.0673398462412622, "broad_best_is_interior": true, "fixed_point_scale": 1.0717438726931376, "fixed_point_score": 36.77506303542132, "dscore_dlogL": 0.0003206477146022735, "target_fraction": 0.9766336180733083, "target_gain": 0.011334104664359856, "target_gain_vs_baseline": 0.9582796270060973, "iterations": 20},
+      {"observer_noise_fraction_of_baseline_target_power": 0.01, "noise_floor_power": 1.3989104914594858e-06, "broad_best_scale": 0.62564474525176, "broad_best_is_interior": true, "fixed_point_scale": 0.623076523238087, "fixed_point_score": 30.481143295047605, "dscore_dlogL": 0.0003463285871418975, "target_fraction": 0.9743480418183857, "target_gain": 0.014693052934167219, "target_gain_vs_baseline": 1.2422730954311192, "iterations": 19},
+      {"observer_noise_fraction_of_baseline_target_power": 0.03, "noise_floor_power": 4.196731474378457e-06, "broad_best_scale": 0.2277489209202255, "broad_best_is_interior": true, "fixed_point_scale": 0.22843269307750763, "fixed_point_score": 23.227692551979942, "dscore_dlogL": -3.9592260137055746e-05, "target_fraction": 0.9709203627311656, "target_gain": 0.017897632230074977, "target_gain_vs_baseline": 1.5132149248329911, "iterations": 26},
+      {"observer_noise_fraction_of_baseline_target_power": 0.1, "noise_floor_power": 1.3989104914594859e-05, "broad_best_scale": 0.2, "broad_best_is_interior": false, "fixed_point_scale": 0.2, "fixed_point_score": 13.719614032699512, "dscore_dlogL": -0.9303317347955087, "target_fraction": 0.9706059627286883, "target_gain": 0.018120454477919455, "target_gain_vs_baseline": 1.5320541738849696, "iterations": 20}
+    ],
+    "reference_noise_fraction": 0.01,
+    "reference_fixed_point_scale": 0.623076523238087,
+    "reference_target_fraction": 0.9743480418183857,
+    "reference_target_gain_vs_baseline": 1.2422730954311192
+  },
+  "operator_change_at_reference_length": {
+    "target_transfer_phase_shift_radians": 0.14888253205567945,
+    "five_tone_best_scalar_residual": 0.025500131047617173,
+    "interpretation": "The finite length edit changes complex frequency response and is not equivalent to one scalar multiplier across the five tones."
+  },
+  "sigh_bridge": "SighImageSuper taught that a surviving eigenmode can be visually dominant even while absolute amplitude approaches zero. Gate 12 finds the geometric version: purity alone drives pathological isolation. A bounded observer's absolute noise floor grounds the length update and can create a finite fixed point.",
+  "claim_boundary": "A finite fixed point here is task- and observer-relative, not a universal biological preferred length. This does not show that dendrites measure phase error, execute the search rule, or grow to literal cavity wavelengths."
+}

@@ -23,7 +23,10 @@ jobs:
       - run: python gate9_causal_write.py
       - run: python purifier_hotspot_probe.py
       - run: python gate11_ais_receipt.py
+      - run: python gate12_natural_length.py
       - uses: actions/upload-artifact@v4
         with:
-          name: gate11-ais-receipt-py${{ matrix.python-version }}
-          path: results/gate11_ais_receipt.json
+          name: gate11-12-receipts-py${{ matrix.python-version }}
+          path: |
+            results/gate11_ais_receipt.json
+            results/gate12_natural_length.json
