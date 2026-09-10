@@ -18,3 +18,4 @@ jobs:
       - run: python experiment.py
       - run: python active_experiment.py
       - run: python nonlinear_experiment.py
+      - run: python gate6b_attacker.py
