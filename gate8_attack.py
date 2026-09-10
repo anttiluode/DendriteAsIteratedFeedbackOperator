@@ -64,7 +64,8 @@ def run():
         wsep = eta * raw_sep
 
         contamination = (wa + wb) / wab if wab > 0 else float("inf")
-        write_ratio = wab / wsep if wsep > 0 else float("inf")
+        write_ratio_eval = wab / wsep if wsep > 0 else float("inf")
+        write_ratio_out = float(write_ratio_eval) if np.isfinite(write_ratio_eval) else None
         route_ab = _route_change(
             cable, a_site, b_site, write_site, b_site, wab, baseline_b_peak
         )
@@ -75,7 +76,7 @@ def run():
         robust = bool(
             wab > 0
             and contamination <= 0.01
-            and write_ratio >= 3.0
+            and write_ratio_eval >= 3.0
             and route_ab >= 0.05
             and route_sep <= 0.02
         )
@@ -87,7 +88,7 @@ def run():
                 "WAB": float(wab),
                 "Wsep": float(wsep),
                 "individual_contamination_fraction": float(contamination),
-                "matched_over_separated_write": float(write_ratio),
+                "matched_over_separated_write": write_ratio_out,
                 "matched_route_change": float(route_ab),
                 "separated_route_change": float(route_sep),
                 "robust": robust,
@@ -161,7 +162,9 @@ def run():
 
 if __name__ == "__main__":
     result = run()
-    print(json.dumps(result, indent=2))
+    print(json.dumps(result, indent=2, allow_nan=False))
     out = Path("results")
     out.mkdir(exist_ok=True)
-    (out / "gate8_attack_receipt.json").write_text(json.dumps(result, indent=2) + "\n")
+    (out / "gate8_attack_receipt.json").write_text(
+        json.dumps(result, indent=2, allow_nan=False) + "\n"
+    )
