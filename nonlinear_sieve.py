@@ -1,8 +1,8 @@
 """Gate 6 machinery: let the resonant branch select the mode *before* nonlinearity.
 
 This module adds one bounded regenerative hotspot to the quasi-active dendrite.
-The nonlinearity is intentionally generic.  It is not claimed to be an NMDA
-kinetic model.  The question is architectural:
+The nonlinearity is intentionally generic. It is not claimed to be an NMDA
+kinetic model. The question is architectural:
 
     distributed resonant operator -> local mode concentration -> nonlinear event
 
@@ -53,13 +53,33 @@ class ResonantNonlinearSieve:
         self.drive_scale = float(desired_hotspot_amp / linear_sum)
 
         # Singles are ~0.04, quadrature pair ~0.0566, matched pair ~0.08 in
-        # the linear phasor prediction.  Put the regenerative knee between
-        # quadrature and matched.  The current is bounded, so the ODE remains
+        # the linear phasor prediction. Put the regenerative knee between
+        # quadrature and matched. The current is bounded, so the ODE remains
         # dissipative at large voltage even though the local feedback is positive.
         self.threshold = 0.060
         self.slope = 0.003
         self.i_max = 0.018
         self.v_sat = 0.050
+
+    def same_protocol_on(self, model: QuasiActiveDendrite):
+        """Return another substrate driven by the *identical* Gate-6 protocol.
+
+        This is used for the Gate-6b attacker. Nothing is recalibrated after the
+        substrate is changed: carrier, phases, source amplitudes, nonlinear knee,
+        and source/hotspot addresses are copied from the active machine.
+        """
+        other = object.__new__(ResonantNonlinearSieve)
+        other.model = model
+        other.A = model.state_matrix()
+        other.nv = model.n
+        other.ns = other.A.shape[0]
+        for name in (
+            "hotspot", "site_a", "site_b", "separated_site_b", "omega",
+            "rel_amp_a", "rel_amp_b", "phase_a", "phase_b_matched",
+            "drive_scale", "threshold", "slope", "i_max", "v_sat",
+        ):
+            setattr(other, name, getattr(self, name))
+        return other
 
     def input_vector(self, site: int) -> np.ndarray:
         b = np.zeros(self.ns, dtype=float)
