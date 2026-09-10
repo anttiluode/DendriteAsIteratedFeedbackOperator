@@ -1,0 +1,75 @@
+{
+  "model": {
+    "compartments": 25,
+    "quasi_active_state_variables": 24,
+    "branch_A": {"g_q": 0.3, "tau_q": 18.0},
+    "branch_B": {"g_q": 0.18, "tau_q": 42.0},
+    "interpretation": "phenomenological restorative quasi-active membrane; not a fitted HCN model"
+  },
+  "G5a_passive_control": {
+    "branch_A_peak_omega": 0.0,
+    "branch_B_peak_omega": 0.0
+  },
+  "G5b_active_nonzero_resonance": {
+    "branch_A": {
+      "peak_omega": 0.12555713604335303,
+      "peak_gain": 0.016789872511427047,
+      "dc_gain": 0.00056132941725944,
+      "peak_over_dc": 29.910907918205474,
+      "q_like": 1.654086040854103
+    },
+    "branch_B": {
+      "peak_omega": 0.06807687538657342,
+      "peak_gain": 0.01686512829110905,
+      "dc_gain": 0.0004915843934115635,
+      "peak_over_dc": 34.30769673965067,
+      "q_like": 1.388463756400646
+    },
+    "peak_frequency_ratio_A_over_B": 1.8443434034006245
+  },
+  "G5c_complex_poles": {
+    "max_real_part": -0.025439949989275644,
+    "stable": true,
+    "complex_pole_count": 12,
+    "least_damped_complex_pole": {
+      "real": -0.039974627490398734,
+      "imag_abs": 0.05468966926579571,
+      "decay_time": 25.01586788370158
+    }
+  },
+  "G5d_equal_tone_mode_purification": {
+    "branch_A": {
+      "input_target_energy_fraction": 0.2,
+      "active_output_target_energy_fraction": 0.9760793326767435,
+      "passive_output_target_energy_fraction": 0.006376886511675457,
+      "active_enrichment_over_input": 4.880396663383717,
+      "active_enrichment_over_passive": 153.0651879862747
+    },
+    "branch_B": {
+      "input_target_energy_fraction": 0.2,
+      "active_output_target_energy_fraction": 0.960306467179214,
+      "passive_output_target_energy_fraction": 0.04357861437594438,
+      "active_enrichment_over_input": 4.80153233589607,
+      "active_enrichment_over_passive": 22.03618634807508
+    }
+  },
+  "G5e_local_active_edit_global_operator_change": {
+    "site": 7,
+    "omega": 0.12555713604335303,
+    "delta_g": 0.06,
+    "deltaH_effective_rank": 1.0000000000009064,
+    "top_singular_fraction": 0.999999999999946,
+    "dense_fraction_above_2pct_peak": 0.2352,
+    "s2_over_s1": 1.0458821519883797e-14,
+    "relative_gain_change": -0.014725069628668258
+  },
+  "verdict": {
+    "passive_is_dc_lowpass": true,
+    "active_has_nonzero_passbands": true,
+    "active_has_complex_stable_poles": true,
+    "branch_A_enriches_target": true,
+    "branch_B_enriches_target": true,
+    "local_edit_is_rank_one": true,
+    "passes": true
+  }
+}
