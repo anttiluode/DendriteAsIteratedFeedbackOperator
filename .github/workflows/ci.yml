@@ -17,3 +17,7 @@ jobs:
       - run: pytest -q
       - run: python experiment.py
       - run: python active_experiment.py
+      - run: python gate5_gate6.py
+      - run: python gate7_slow_write.py
+      - run: python gate8_attack.py
+      - run: python gate9_causal_write.py
