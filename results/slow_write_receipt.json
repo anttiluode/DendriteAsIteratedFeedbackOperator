@@ -1,0 +1,42 @@
+{
+  "model": {
+    "compartments": 25,
+    "a_site": 22,
+    "write_site": 23,
+    "b_site": 24,
+    "edited_edge": [
+      23,
+      24
+    ]
+  },
+  "G7_persistent_local_write": {
+    "write_rule": "eta * integral(max(V_write-threshold,0)^2) dt",
+    "threshold": 0.012,
+    "eta": 800.0,
+    "delta_g_by_world": {
+      "W0": 0.0,
+      "WA": 0.0,
+      "WB": 0.0,
+      "WAB": 0.12607834716397223,
+      "Wsep": 0.01028229645901331
+    },
+    "collision_specific_delta_g": 0.12607834716397223,
+    "matched_over_separated_write": 12.261691507003166,
+    "individual_A_write": 0.0,
+    "individual_B_write": 0.0
+  },
+  "G7_after_fast_state_erasure": {
+    "recall_initial_fast_state": "exact zero",
+    "recall_synaptic_gates": "none; passive unit-charge A probe only",
+    "B_peak_baseline": 0.08640093851031495,
+    "B_peak_matched_memory": 0.09351573391043566,
+    "B_peak_separated_memory": 0.08713690229607943,
+    "relative_B_change_matched": 0.08234627450570238,
+    "relative_B_change_separated": 0.00851800684637946,
+    "soma_peak_baseline": 0.0016173177591291572,
+    "soma_peak_matched_memory": 0.0015981368496494357,
+    "soma_peak_separated_memory": 0.0016152892483775232,
+    "relative_soma_change_matched": -0.0118597037418605,
+    "branch_vs_soma_relative_visibility": 6.943366908487737
+  }
+}
