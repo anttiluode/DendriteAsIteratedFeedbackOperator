@@ -401,15 +401,131 @@ python gate5_gate6.py
 
 ---
 
+# Gate 7 — coincidence writes a persistent local constraint
+
+Gate 6 still only changed the operator while the nonlinear state was present.
+
+Gate 7 finally crosses the next boundary.
+
+The A+B training event drives a local midpoint voltage. A deliberately simple local plasticity rule integrates only suprathreshold activity,
+
+```math
+\Delta g
+=
+\eta\int
+\max(V_{\rm write}-\vartheta,0)^2\,dt.
+```
+
+The rule has no access to the labels "A" or "B". It only sees the local voltage consequence.
+
+Five matched-budget worlds are compared:
+
+```text
+W0     no event
+WA     A alone
+WB     B alone
+WAB    simultaneous A+B
+Wsep   A and B separated by 15 time units
+```
+
+For the frozen parameters:
+
+```text
+WA write       0
+WB write       0
+WAB write      0.126078
+Wsep write     0.0102823
+WAB / Wsep     12.26x
+```
+
+The written quantity changes one local axial conductance between compartments 23 and 24.
+
+Then the important part happens:
+
+```text
+erase every fast voltage state
+erase every synaptic gate
+start recall from exact zero
+inject the same unit-charge A cue
+```
+
+Only the changed physical constraint survives.
+
+The later B-site peak is
+
+```text
+baseline          0.0864009
+matched memory    0.0935157
+separated memory  0.0871369
+```
+
+or
+
+```text
+matched route change    +8.23%
+separated control       +0.85%
+```
+
+The soma peak, meanwhile, changes by only `-1.19%`.
+
+So the same structural memory is about **6.94x more visible locally at the branch than at the soma** when relative changes are compared.
+
+That is unexpectedly clean because it joins three of the older threads in one toy:
+
+```text
+local nonlinear coincidence
+        ->
+persistent constraint edit
+        ->
+fast state erased
+        ->
+same later cue
+        ->
+different branch route
+        ->
+soma mostly misses it
+```
+
+This is no longer merely "the current state changes the filter."
+
+\[
+\boxed{
+\text{experience changed the dendritic constraint,
+and the changed constraint altered a later signal}
+}
+\]
+
+The frozen receipt is [`results/slow_write_receipt.json`](results/slow_write_receipt.json). Run:
+
+```bash
+python gate7_slow_write.py
+```
+
+The important limitation is equally explicit: the plasticity threshold and scale are engineered in this toy. Gate 7 proves that the complete causal loop can be made local and persistent in the compartmental substrate; it does **not** prove that this exact write rule is biological or that such a memory will self-organize without design.
+
+---
+
 # Next gates
 
-1. **Slow write.** Let a local coincidence make a persistent conductance/geometry edit, erase every fast voltage/gating variable, then ask whether an identical later cue travels differently.
-2. **Causal subtraction.** Separate the lasting edit caused specifically by A+B coincidence from the edits caused by A alone, B alone, background maturation, and probe back-action.
-3. **Real morphology.** Replace the toy Y with the audited `Operaattori` cell and test local length/diameter edits; retain pure pose as a required null.
-4. **Operator tangent test.** Compare the measured global transfer change against the low-dimensional prediction from local morphology/conductance tangents.
-5. **Bounded query.** Ask whether soma-only observation misses an edit that an actively chosen dendritic stimulation/readout can reveal.
+1. **Threshold attacker.** Sweep the Gate-7 write threshold/scale and report the region where matched coincidence remains selective rather than choosing one flattering point.
+2. **Causal write subtraction.** Allow A and B individual worlds to write too, then retain only the inclusion/exclusion component attributable specifically to their nonlinear encounter.
+3. **Real morphology.** Replace the Y toy with the audited `Operaattori` reconstruction; use local length/diameter edits and retain pure pose as a required null.
+4. **Operator tangent test.** Compare measured global transfer edits with the low-dimensional prediction from local morphology/conductance tangents.
+5. **Bounded query.** Search for a stimulation/readout that reveals a real structural edit the soma trace cannot identify reliably.
 
-The strongest bridge remains the real-morphology test. `Operaattori` already compiles morphology into a cable operator. `SighImageSuper` tells us how repeated operators organize persistence. The resonant-fluid machine tells us how local material change can alter later propagation. Gate 6 now adds the missing fast statement: **the effective operator can also depend on the state currently occupying the dendrite.**
+The conceptual chain is now complete in the toy:
+
+```text
+structure
+  -> propagation operator
+  -> active state changes instantaneous operator
+  -> coincidence produces a local slow write
+  -> fast state disappears
+  -> changed structure changes later propagation
+  -> bounded observation determines whether memory is visible
+```
+
+That is almost exactly the architecture we kept reaching for separately in `SighImageSuper`, `Operaattori`, Active Dendrite, Jello, and the nonlinear-fluid machine.
 
 ---
 
@@ -417,13 +533,16 @@ The strongest bridge remains the real-morphology test. `Operaattori` already com
 
 This repo does **not** establish that biological dendrites implement holographic memory, that action potentials are standing waves, that nodes of Ranvier are resonant phase filters, or that this architecture beats transformers.
 
-It now establishes six small numerical/algebraic facts in transparent compartmental toys:
+It now establishes seven small numerical/algebraic facts in transparent compartmental toys:
 
 - repeated passive cable evolution selects slow modes;
 - continued forcing produces the same grounded fixed-point structure as the Sigh recursion;
 - morphologically different dendritic branches have temporal kernels that cannot be reduced to one scalar multiplier;
 - a local axial-conductance edit produces an exact global rank-one change in the continuous resolvent;
 - a delayed restorative active current turns the same branch into a stable frequency-selective operator;
-- two local voltage-dependent conductances make the instantaneous Jacobian state-dependent, so the same tiny probe can have a different global consequence.
+- two local voltage-dependent conductances make the instantaneous Jacobian state-dependent, so the same tiny probe can have a different global consequence;
+- a local coincidence-triggered conductance write survives exact fast-state erasure and alters a later cue's branch route, while the soma is much less sensitive to that edit.
 
-The missing step is still the hardest one: **persistent local write -> fast-state erasure -> changed later route**, preferably on the audited real morphology.
+The remaining question is no longer whether the pieces can be connected.
+
+It is whether the same mechanism survives **parameter attacks and real morphology** without being hand-held into existence.
