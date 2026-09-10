@@ -1,46 +1,62 @@
 # Dendrite As Iterated Feedback Operator
 
-This repo started with a cautious bridge from `SighImageSuper` to passive cable theory. Gate 5 now tests the stronger picture directly:
+This repo asks a stronger question than whether a passive dendrite is a leaky cable:
 
-> **Can a dendritic branch behave as an eigenmode purifier: taking a mixed temporal signal, rejecting most components, and delivering a branch-selected non-zero mode to a bounded soma readout?**
+> **Can dendritic structure + membrane kinetics act as an eigenmode purifier — rejecting most of a mixed temporal input while making one branch-selected non-zero mode dominate the bounded output?**
 
-In the current numerical toy, **yes — operationally, in that narrow filtering sense.**
+In the current numerical toy, **yes in the narrow filtering sense.**
 
-The claim is not that dendrites are acoustic cavities, RF waveguides, or hidden Helmholtz resonators. The useful object is the **distributed operator** compiled by morphology and membrane kinetics.
+The repo then attacks the stronger follow-up: does that purified mode specifically control a local nonlinear event? The first nonlinear gate works, but an ablation shows that its selectivity is **not yet causally attributable to resonance**. That failure is preserved.
+
+The working ontology is:
 
 ```text
 local geometry + membrane kinetics
         ->
 frequency-dependent propagation operator
         ->
-mode-selective dendritic transfer
+mode selection / purification
         ->
-bounded soma / branch readout
+local nonlinear event
+        ->
+state-dependent operator
+        ->
+slow material edit
+        ->
+future propagation changes
 ```
 
-The passive cable remains the control. The new active model is a phenomenological restorative quasi-active membrane, not a fitted HCN model.
+The first four lines are now executable in pieces. The causal link between **purification** and **nonlinearity** is the next target.
 
 ---
 
-# Latest result — Gate 5: non-zero mode purification
+# Gate 5 — the eigenmode purifier
 
-The active branch adds one restorative state `z` per dendritic compartment:
+The passive cable is the control. It obeys
 
 ```math
-C\dot V=-GV-g_q z+I,
+C\dot V=-GV+I
+```
+
+and its autonomous modes simply decay. In the passive toy, the distal-to-soma transfer peaks at DC. Repeated evolution eventually leaves the slowest decaying direction: useful spectral selection, but basically diffusive forgetting.
+
+Gate 5 adds one phenomenological restorative state per dendritic compartment:
+
+```math
+C\dot V=-GV-g_qz+I,
 ```
 
 ```math
 \tau_q\dot z=V-z.
 ```
 
-For sinusoidal drive this contributes
+Under sinusoidal drive the local quasi-active contribution is
 
 ```math
 Y_q(\omega)=\frac{g_q}{1+i\omega\tau_q},
 ```
 
-so the voltage transfer is
+so the global transfer becomes
 
 ```math
 H(\omega)=
@@ -50,24 +66,11 @@ G+i\omega C+
 \right]^{-1}.
 ```
 
-This enlarged state system can have stable complex poles and a genuine non-zero pass band.
+This is a phenomenological restorative membrane model, **not** a fitted HCN model and not a claim that a biological dendrite is an acoustic waveguide.
 
-The deterministic GitHub Actions receipt is frozen in [`results/active_receipt.json`](results/active_receipt.json).
+## Two branches, two non-zero pass bands
 
-## Passive control: blur / diffusion
-
-The matched passive morphology peaks at DC on both distal-to-soma channels:
-
-```text
-branch A peak omega = 0
-branch B peak omega = 0
-```
-
-That is the old result. Repeated passive evolution selects the slowest decaying direction, but it is fair to call that **diffusive mode selection**, not the interesting purifier we were after.
-
-## Active branches: two different non-zero pass bands
-
-With quasi-active restorative membrane:
+GitHub Actions gives:
 
 ```text
 branch A
@@ -81,225 +84,156 @@ branch B
     Q-like           1.388
 ```
 
-The branch peak frequencies differ by a factor of
+The full `V + z` system is stable and contains `12` complex poles. The least-damped measured pair is approximately
 
 ```text
-1.844x
+-0.03997 +/- i 0.05469
 ```
 
-although the two branches terminate at the same soma.
+So this is categorically different from the passive RC control's purely real decays, while remaining a dissipative electrical state-space model.
 
-So the branch is not merely a scalar coefficient attached to an input. It is a **tuned temporal transfer operator**.
+## The actual purification test
 
-## The actual purifier test
-
-Give the distal tip five equal-energy temporal components. The target resonant component therefore starts with only
+Feed five equal-energy temporal components into a distal tip. The target resonant component starts with only
 
 ```text
 20% of input energy.
 ```
 
-At the soma, after propagation through the active dendritic operator:
+At the soma:
 
 ```text
-branch A target fraction: 97.61%
-branch B target fraction: 96.03%
+branch A active target fraction   97.61%
+branch B active target fraction   96.03%
+
+branch A passive target fraction   0.64%
+branch B passive target fraction   4.36%
 ```
 
-The same target frequencies through the passive control account for only
-
-```text
-branch A passive target fraction: 0.64%
-branch B passive target fraction: 4.36%
-```
-
-So in this toy the dendritic channel really is doing the thing the original visual intuition suggested:
+So the toy really does this:
 
 ```text
 mixed temporal input
         ->
-branch operator
+distributed dendritic operator
         ->
-most components strongly rejected
+most components rejected
         ->
-selected non-zero mode dominates the bounded output
+selected non-zero mode dominates output
 ```
 
-That is why the repo now uses **eigenmode purifier** as an operational hypothesis rather than as a metaphor.
+That is the precise operational meaning of **eigenmode purifier** used here.
 
-Important: this is still linear resonant filtering. No information is created and no nonlinear winner-take-all process is implied. The next gate asks whether voltage-dependent coincidence can turn this from a fixed resonant sieve into a **state-dependent** one.
-
-## Complex poles are actually present
-
-The full `V + z` state operator is stable:
-
-```text
-maximum real pole part = -0.02544
-```
-
-and contains
-
-```text
-12 complex poles.
-```
-
-The least-damped complex pole measured in the receipt is
-
-```text
-lambda = -0.03997 +/- i 0.05469
-```
-
-so this is categorically different from the passive RC control, whose modal generator has only real decays.
-
-Adding a gating variable does **not** mean the dendrite has literally become an acoustic wave equation. It means the distributed electrical system now has oscillatory state-space modes and resonant transfer.
+The frozen receipt is [`results/active_receipt.json`](results/active_receipt.json).
 
 ---
 
-# Local structural edits still make global low-rank operator edits
+# Gate 6 — can the selected activity enter a nonlinear regime?
 
-The older passive gate gave an exact Sherman-Morrison result. For an axial edge edit,
+A bounded generic regenerative hotspot was placed on branch A. Two same-branch sources were phase/amplitude calibrated at branch A's preferred frequency so that the matched pair reaches the hotspot coherently.
 
-```math
-G\rightarrow G+\delta g\,bb^T,
-```
-
-the full resolvent changes by rank one.
-
-Gate 5 shows the same structural idea survives active frequency selectivity.
-
-At fixed `omega`, changing one local quasi-active conductance is one diagonal admittance edit. Numerically:
+At the default operating point:
 
 ```text
-Delta H effective rank        1.0000000000009
-top singular fraction         0.999999999999946
-s2 / s1                       1.05e-14
-entries > 2% peak change      23.52%
+matched linear hotspot peak      0.0800
+quadrature hotspot peak          0.05657
+single hotspot peak              0.0400
+nonlinear knee                   0.0600
 ```
 
-So a **single local membrane change** can create a distributed global edit in the frequency-specific dendritic transfer operator.
+The soma nonlinear residual is:
 
-This is the bridge back to `resonant-graph-with-a-nonlinear-fluid-interior` and `Kompressori`:
+| condition | residual RMS |
+|---|---:|
+| matched | `4.2039e-3` |
+| quadrature | `2.8811e-3` |
+| high off-band | `6.93e-10` |
+| spatially separated | `1.60e-6` |
+| single | `1.48e-6` |
 
-> **local physical change -> global structured operator change**
+So coherent same-branch activity can indeed be converted into a selective nonlinear event. The hardest control is quadrature, and matched beats it by `1.459x`.
 
-without storing or editing a dense matrix coefficient-by-coefficient.
+This hotspot is deliberately generic. **It is not an NMDA kinetic model.**
+
+The frozen receipt is [`results/nonlinear_receipt.json`](results/nonlinear_receipt.json).
 
 ---
 
-# Why this is a stronger SighImageSuper connection
+# Gate 6b — attack the result rather than celebrate it
 
-`SighImageSuper` began with
+Two obvious attacks were run.
 
-```math
-x_{n+1}=Ax_n
-```
+## Attack 1: was the result only the chosen threshold?
 
-and showed that the operator determines which differences disappear quickly and which persist.
-
-The first dendrite gate copied only that passive logic:
+Move the nonlinear knee while freezing carrier, phases, amplitudes, substrate and geometry:
 
 ```text
-many spatial modes
-    -> repeated cable decay
-    -> slowest mode remains last
+knee 0.045 -> matched/quadrature   1.151x
+knee 0.050 ->                      1.197x
+knee 0.055 ->                      1.278x
+knee 0.060 ->                      1.459x
+knee 0.065 ->                     41.822x
+knee 0.070 ->                    261.534x
+knee 0.075 ->                   1317.572x
 ```
 
-Gate 5 moves to the more interesting object:
+The matched advantage therefore is not confined to one hand-picked threshold.
+
+## Attack 2: is resonance actually necessary?
+
+Remove all quasi-active conductance while keeping the **identical raw Gate-6 protocol**: same carrier, source amplitudes, phase, addresses, hotspot and nonlinear knee. No passive re-tuning.
+
+The passive ablation still gives:
 
 ```text
-mixed temporal modes
-    -> distributed resonant operator
-    -> one non-zero branch-selected band survives the route
-    -> bounded soma sees a purified answer
+matched hotspot peak             0.06633
+matched nonlinear residual       0.002927
+quadrature residual              1.93e-8
 ```
 
-That is much closer to the Berglund visual intuition: geometry/material constraints determine **which global response is easy for the system to support**.
+The active resonant substrate makes the matched hotspot `1.206x` larger and the matched nonlinear residual `1.436x` larger.
 
-The crucial distinction is that we are not storing the selected waveform as a template.
+But the passive substrate still performs strong coherent coincidence selection.
 
-```text
-The structure makes that response natural.
-```
+Therefore:
 
-Or in the language recurring across the repos:
+> **Gate 6 does not yet establish that resonance caused the nonlinear selectivity.**
 
-> **Structure compiles the operator; the operator decides which modes can live.**
+That matters. A clean single carrier can add coherently even in a passive cable. So the next experiment must make the purifier indispensable rather than merely present.
+
+Full attacker write-up: [`GATE6.md`](GATE6.md). Frozen receipt: [`results/gate6b_attacker.json`](results/gate6b_attacker.json).
 
 ---
 
-# Earlier gates
+# The older structural results still matter
 
-The current repo still preserves the passive controls because they tell us exactly what Gate 5 added.
+## Passive Sigh-style iteration
 
-## G0 — stable recurrent cable
+A distal pulse begins with modal effective dimension `10.005` and falls under silent passive evolution to `1.019`; the late normalized state reaches cosine `0.99863` with the slowest mode.
 
-A 25-compartment Y cable has passive step spectral radius
+That is the SighImageSuper bridge, but only as a passive control.
 
-```text
-0.9791865
-```
+## Branch != scalar weight
 
-so every autonomous passive mode decays.
+Equal charge at two distal tips produces soma kernels peaking at steps `79` and `93`. Even after fitting the best scalar map, `18.23%` of one waveform remains unexplained.
 
-## G1 — passive Sigh-style mode selection
+A branch carries a temporal transfer function, not merely a multiplier.
 
-A distal pulse begins with modal effective dimension
+## One local edit -> global low-rank operator edit
 
-```text
-10.005
-```
-
-and falls under silent iteration to
-
-```text
-step 20    3.741
-step 80    2.830
-step 240   1.514
-step 600   1.019
-```
-
-with late absolute cosine `0.99863` to the slowest passive mode.
-
-Useful control; not yet a resonant purifier.
-
-## G2 — continued forcing preserves cue identity
-
-The Sigh recursion
+For one axial conductance edit
 
 ```math
-V_{n+1}=\alpha q+(1-\alpha)PV_n
+G' = G + \delta g\,bb^T
 ```
 
-has fixed point
+and
 
 ```math
-V^*=\alpha[I-(1-\alpha)P]^{-1}q.
+H(s)=[G+sC]^{-1},
 ```
 
-The numerical error is about `1.1e-15`. Two distal cues have nearly orthogonal grounded fixed points (`cos ~1.84e-6`) but converge toward the same passive late mode after forcing is removed (`cos ~0.99909`).
-
-## G3 — branch != scalar weight
-
-Equal charge injected into the two distal tips yields soma kernels peaking at different times:
-
-```text
-branch A: step 79
-branch B: step 93
-```
-
-After fitting the best scalar multiplier, `18.23%` of one waveform remains unexplained.
-
-A branch therefore carries delay/filter geometry that a scalar weight cannot represent.
-
-## G4 — one axial edit -> rank-one global resolvent edit
-
-For
-
-```math
-H(s)=[G+sC]^{-1}
-```
-
-and one edge edit `G -> G + delta_g bb^T`, Sherman-Morrison gives
+Sherman-Morrison gives
 
 ```math
 \Delta H
@@ -307,83 +241,90 @@ and one edge edit `G -> G + delta_g bb^T`, Sherman-Morrison gives
         {1+\delta g b^THb}.
 ```
 
-The numerical effective rank is exactly `1.0` to roundoff.
+The passive numerical update has effective rank exactly `1.0` to roundoff.
+
+At fixed frequency, one local quasi-active conductance edit also gives a global transfer edit with effective rank
+
+```text
+1.0000000000009
+```
+
+and `s2/s1 ~ 1e-14`.
+
+So the recurring structural claim survives both passive and quasi-active versions:
+
+> **A local physical change can make a distributed but low-dimensional edit to the global response operator.**
 
 ---
 
-# What Gemini's stronger picture gets right — and what still needs testing
+# Why this connects Sigh, the resonant cavities, and the neuron work
 
-The useful criticism of the passive version was correct:
+`SighImageSuper` showed:
 
-> **A passive RC cable only proves diffusive spectral decay. It does not demonstrate selective non-zero resonance.**
+> **the operator determines which distinctions persist.**
 
-Gate 5 fixes that.
+The resonant-cavity work showed:
 
-A few stronger statements should still remain hypotheses rather than conclusions:
+> **sparse local constraints can compile a dense global Green's function.**
 
-- Active conductances can generate resonance and complex poles without making the dendrite literally a hyperbolic acoustic waveguide.
-- NMDA gives voltage-dependent cooperative nonlinearity, but whether it sharpens *the particular resonant mode selected by the branch* must be measured rather than assumed.
-- Branch points and spine necks create impedance filtering, but ordinary dendrite theory does not imply that every neck is a cavity-style tunneling resonator.
+This repo now adds:
 
-The right thing is therefore not to retreat from the eigenmode-purifier thought. It is to **make each stronger part executable and attack it with controls.**
+> **a dendrite-like distributed electrical operator can strongly enrich a non-zero temporal mode before a bounded readout.**
+
+The important claim is not "dendrites are little acoustic cavities."
+
+It is:
+
+```text
+weights / parameters = local physical constraints
+operator             = propagation implied by those constraints
+state                = activity occupying its modes
+computation          = which modes reach which nonlinear regions/readouts
+learning             = local changes that alter future propagation
+```
+
+That is much closer to the original intuition than flattening a dendrite into one scalar `w_ij`.
 
 ---
 
-# Next gates
+# Next gate — make purification causally necessary
 
-## Gate 6 — nonlinear resonant sieve
+Do **not** give the nonlinear hotspot a clean carrier that the passive cable can also sum.
 
-Put a local voltage-dependent coincidence element on the already-resonant branch.
+Reuse Gate 5's five equal-energy temporal components, so the target mode starts at only `20%` of the input. Give the active and passive substrates the exact same broadband waveform and the exact same hotspot.
 
-Compare equal total input energy under:
-
-```text
-matched carrier + matched timing
-matched carrier + wrong timing
-wrong carrier + matched timing
-spatially separated inputs
-single-input controls
-```
-
-Measure whether the nonlinear residual is selectively largest when activity occupies the branch's own resonant pass band.
-
-The important question is not merely "does NMDA make a bigger voltage?" It is:
-
-> **Does local nonlinearity preferentially amplify the mode the distributed branch operator already selected?**
-
-## Gate 7 — state-dependent Jacobian
-
-Linearize before and during the nonlinear event:
-
-```math
-J(x,\theta)=\partial F/\partial x.
-```
-
-Then ask whether the selected mode changes the operator that selects the next mode.
-
-## Gate 8 — slow write
-
-Let successful coincidence alter one local conductance, erase fast state, and replay the identical broadband cue.
-
-The target loop becomes:
+Then ask whether:
 
 ```text
-mode selected
-    -> local nonlinear encounter
-    -> local material edit
-    -> global frequency-dependent resolvent changes
-    -> future mode selection changes
+ACTIVE
+broadband mixture
+    -> branch purifies target mode
+    -> target crosses nonlinear regime
+    -> bounded nonlinear response
+
+PASSIVE ABLATION
+same broadband mixture
+    -> no target purification
+    -> no comparable selective nonlinear event
 ```
 
-That would be the dendritic analogue of the direct-fluid machine:
+No re-tuning after ablation.
+
+If that survives, then we can finally make the stronger sentence:
+
+> **The dendritic operator purified a mode, and that purified mode triggered the nonlinear event.**
+
+After that:
 
 ```text
-wave -> encounter -> changed medium -> next wave travels differently
+selected mode
+    -> nonlinear state change
+    -> Jacobian changes
+    -> slow local write
+    -> future resolvent changes
 ```
 
-## Gate 9 — real Operaattori morphology
-
-Transfer the whole experiment to the audited reconstructed morphology. The decisive test is whether real local length/diameter/conductance changes produce low-dimensional but global changes in **frequency-dependent** transfer and whether different real branches purify different temporal modes.
+and then transfer the experiment to the audited real `Operaattori` morphology.
 
 ---
 
@@ -394,32 +335,35 @@ python -m pip install -e .[dev]
 pytest -q
 python experiment.py
 python active_experiment.py
+python nonlinear_experiment.py
+python gate6b_attacker.py
 ```
 
-CI runs all of these on Python 3.10 and 3.12.
+CI runs the full sequence on Python 3.10 and 3.12.
 
-See [`THEORY.md`](THEORY.md) for the equations and claim boundaries.
+See [`THEORY.md`](THEORY.md), [`GATE6.md`](GATE6.md), and the frozen `results/` receipts.
 
 ---
 
 ## Claim boundary
 
-Established by this numerical toy:
+Established in this numerical toy:
 
-- passive cable evolution performs diffusive modal selection;
-- continued forcing gives a cue-specific resolvent response;
-- different branches have non-scalar temporal kernels;
-- one local passive edge edit creates an exact rank-one global resolvent edit;
-- a restorative quasi-active extension creates stable complex poles and non-zero distal-to-soma pass bands;
-- from five equal-energy input tones, the chosen resonant component can dominate the soma output at about `96-98%` in this deliberately tuned toy;
-- one local active-conductance edit still makes a global rank-one transfer edit at fixed frequency.
+- passive cable evolution performs diffusive mode selection;
+- branch transfer is not reducible to one scalar weight;
+- one local edge/conductance edit can make a global rank-one resolvent change;
+- a restorative quasi-active extension gives stable complex poles and branch-specific non-zero pass bands;
+- a deliberately tuned quasi-active branch can enrich one of five equal-energy temporal components from `20%` input energy to about `96-98%` of bounded-output energy;
+- coherent same-branch activity can drive a local regenerative nonlinearity;
+- the Gate-6 matched advantage survives a nonlinear-threshold sweep.
 
 Not established:
 
-- that real dendrites routinely achieve this degree of purification;
-- that HCN alone implements the exact toy parameters;
+- that resonance is necessary for the current two-tone nonlinear coincidence result — the passive ablation disproves that claim for Gate 6;
+- that real dendrites routinely achieve the toy's purification strength;
+- that HCN alone matches the toy parameters;
 - that biological dendrites are acoustic/RF waveguides;
-- that NMDA automatically performs mode competition;
-- that the mechanism gives useful learning, hardware efficiency, transformer equivalence, or brain-level computation.
+- that NMDA automatically implements resonant mode competition;
+- general learning, transformer equivalence, energy advantage, or brain-level computation.
 
-Those are now experiments rather than metaphors.
+Those are experiments, not conclusions.
