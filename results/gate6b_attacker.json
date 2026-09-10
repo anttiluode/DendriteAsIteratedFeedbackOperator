@@ -1,0 +1,48 @@
+{
+  "question": "Does Gate 6 survive removal of quasi-active resonance and movement of the nonlinear knee?",
+  "fixed_protocol": {
+    "omega": 0.12555713604335303,
+    "phase_b_matched": -0.498554471208825,
+    "relative_input_amplitudes": [1.0, 0.3291782806390395],
+    "drive_scale": 0.44337199335776517,
+    "hotspot": 3,
+    "default_threshold": 0.06
+  },
+  "active_substrate": {
+    "matched": {"linear_hotspot_peak": 0.0800000000577435, "nonlinear_residual_soma_rms": 0.004203933378882861},
+    "quadrature": {"linear_hotspot_peak": 0.05656853990966143, "nonlinear_residual_soma_rms": 0.00288105112800692},
+    "wrong_high_carrier": {"linear_hotspot_peak": 0.02146877200437051, "nonlinear_residual_soma_rms": 6.933451752482189e-10},
+    "spatially_separated": {"linear_hotspot_peak": 0.040225471682318444, "nonlinear_residual_soma_rms": 1.599208626735371e-06},
+    "single_A": {"linear_hotspot_peak": 0.0400000000254477, "nonlinear_residual_soma_rms": 1.4808544503243565e-06}
+  },
+  "passive_ablation_same_protocol": {
+    "matched": {"linear_hotspot_peak": 0.06632538478997954, "nonlinear_residual_soma_rms": 0.002926829439670535},
+    "quadrature": {"linear_hotspot_peak": 0.02756949302658174, "nonlinear_residual_soma_rms": 1.9316739482770484e-08},
+    "wrong_high_carrier": {"linear_hotspot_peak": 0.016411467474349038, "nonlinear_residual_soma_rms": 9.902696507094456e-11},
+    "spatially_separated": {"linear_hotspot_peak": 0.03509567457565441, "nonlinear_residual_soma_rms": 2.602169059375969e-07},
+    "single_A": {"linear_hotspot_peak": 0.03498953037874903, "nonlinear_residual_soma_rms": 2.509202769602973e-07}
+  },
+  "comparisons": {
+    "active_matched_over_quadrature": 1.459166530581877,
+    "passive_matched_over_quadrature": 151517.7777430354,
+    "active_matched_residual": 0.004203933378882861,
+    "passive_matched_residual": 0.002926829439670535,
+    "active_to_passive_matched_residual": 1.4363438203478252,
+    "active_to_passive_matched_hotspot_peak": 1.2061746842640244
+  },
+  "active_threshold_sweep": [
+    {"threshold": 0.045, "matched_over_quadrature": 1.150506220536043},
+    {"threshold": 0.050, "matched_over_quadrature": 1.197061378557006},
+    {"threshold": 0.055, "matched_over_quadrature": 1.278179125087894},
+    {"threshold": 0.060, "matched_over_quadrature": 1.459166530581877},
+    {"threshold": 0.065, "matched_over_quadrature": 41.82227274669877},
+    {"threshold": 0.070, "matched_over_quadrature": 261.5341904825643},
+    {"threshold": 0.075, "matched_over_quadrature": 1317.5719183434078}
+  ],
+  "conclusion": {
+    "single_threshold_attack": "survives: matched beats quadrature across every tested knee from 0.045 to 0.075",
+    "resonance_necessity_attack": "fails: the passive cable with the identical raw protocol still gives strong matched nonlinear selectivity; current Gate 6 does not isolate resonance as the cause",
+    "next_required_test": "drive a genuinely broadband/multimode mixture so the quasi-active operator must purify the target mode before nonlinearity; compare against the identical passive substrate without re-tuning",
+    "warning": "Gate 6 remains a designed coincidence mechanism proof, not evidence that biological dendrites implement this parameterization."
+  }
+}
