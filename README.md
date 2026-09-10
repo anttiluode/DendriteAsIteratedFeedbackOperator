@@ -294,15 +294,122 @@ Whether that is computationally cheaper or more useful than conventional network
 
 ---
 
+# Gate 5 — active membrane state changes the spectrum
+
+The passive cable was intentionally boring: it is a stable low-pass operator.
+
+Gate 5 adds a minimal delayed restorative current on the distal half of branch B,
+
+```math
+C\dot V=-GV-g_rSw+I,
+\qquad
+\tau\dot w=S^TV-w.
+```
+
+This is **not** fitted as a quantitative HCN model. It is the smallest active-conductance motif needed to test the operator idea honestly.
+
+The result changes qualitatively:
+
+```text
+passive peak / DC gain = 1.000
+passive peak omega     = 0
+
+active peak / DC gain  = 2.597
+active peak omega      = 0.0791
+complex poles          = 6
+largest Re(pole)       = -0.0434
+```
+
+So the same cable topology can move from a purely low-pass transfer to a stable frequency-selective operator when active state is added.
+
+That is the first place where the resonant-cavity picture becomes biologically useful without claiming the dendrite is literally an acoustic cavity:
+
+> **morphology supplies the spatial constraints; active conductance supplies additional dynamical coordinates; together they determine which temporal modes are preferentially transmitted.**
+
+---
+
+# Gate 6 — the present dendritic state changes the operator
+
+Gate 6 adds two local voltage-dependent NMDA-like conductances on the distal branch. The voltage gate is intentionally qualitative rather than a fitted receptor model.
+
+Two coincident inputs produce a soma interaction residual whose norm is
+
+```text
+matched coincidence   1.08268e-4
+15-time-unit separated 5.03242e-5
+matched / separated   2.151
+```
+
+The more important test freezes the **same external synaptic gates** at `t = 8` and evaluates the instantaneous Jacobian twice:
+
+```math
+J(V,t)=\frac{\partial \dot V}{\partial V}.
+```
+
+Once at the actual A+B voltage state, and once at `V=0`.
+
+Only the voltage-dependent internal state differs.
+
+The Jacobian change has
+
+```text
+||Delta J|| = 0.010777
+rank        = 2
+```
+
+because only two local nonlinear conductances are active.
+
+Yet a tiny B-site probe sees a different soma transfer:
+
+```text
+zero-state linearization  0.145205
+A+B-state linearization   0.171316
+ratio                     1.17982
+```
+
+The complete A+B trajectory remains locally stable in this toy; the largest sampled real Jacobian eigenvalue is `-0.01299`.
+
+This is the line I wanted the repo to reach:
+
+```text
+morphology
+    -> baseline operator
+
+current dendritic state
+    -> different instantaneous operator
+
+local nonlinear encounter
+    -> local Delta J
+
+same later perturbation
+    -> different global response
+```
+
+So the branch is not merely carrying a state through a fixed filter.
+
+\[
+\boxed{\text{the state participates in defining the filter}}
+\]
+
+That is substantially closer to the object we kept circling in Sigh, Jello, the nonlinear-fluid machine, and the Geometric Neuron work.
+
+The frozen active receipt is [`results/active_receipt.json`](results/active_receipt.json). Run it with:
+
+```bash
+python gate5_gate6.py
+```
+
+---
+
 # Next gates
 
-1. **Active resonance.** Add an HCN-like gating variable and show how the branch transfer spectrum changes without pretending the passive cable already oscillates.
-2. **NMDA / local nonlinear encounter.** Two equal inputs, matched versus separated in space/time; measure the non-additive soma and branch response.
-3. **Jacobian operator.** Linearize the active dendrite around different local states and directly measure `J(theta, x)` as the instantaneous operator.
-4. **Slow write.** Let a local coincidence change one conductance, erase fast state, then ask whether a later identical cue follows a measurably different route.
-5. **Real morphology.** Replace the toy Y with the audited `Operaattori` morphology and test whether its local length/diameter tangents produce the predicted low-dimensional global transfer edits.
+1. **Slow write.** Let a local coincidence make a persistent conductance/geometry edit, erase every fast voltage/gating variable, then ask whether an identical later cue travels differently.
+2. **Causal subtraction.** Separate the lasting edit caused specifically by A+B coincidence from the edits caused by A alone, B alone, background maturation, and probe back-action.
+3. **Real morphology.** Replace the toy Y with the audited `Operaattori` cell and test local length/diameter edits; retain pure pose as a required null.
+4. **Operator tangent test.** Compare the measured global transfer change against the low-dimensional prediction from local morphology/conductance tangents.
+5. **Bounded query.** Ask whether soma-only observation misses an edit that an actively chosen dendritic stimulation/readout can reveal.
 
-The last one is the strongest bridge: `Operaattori` already compiles morphology into a cable operator. `SighImageSuper` tells us how repeated operators organize persistence. The resonant-fluid machine tells us how local material change can alter later propagation. This repo is where those three statements become one equation.
+The strongest bridge remains the real-morphology test. `Operaattori` already compiles morphology into a cable operator. `SighImageSuper` tells us how repeated operators organize persistence. The resonant-fluid machine tells us how local material change can alter later propagation. Gate 6 now adds the missing fast statement: **the effective operator can also depend on the state currently occupying the dendrite.**
 
 ---
 
@@ -310,11 +417,13 @@ The last one is the strongest bridge: `Operaattori` already compiles morphology 
 
 This repo does **not** establish that biological dendrites implement holographic memory, that action potentials are standing waves, that nodes of Ranvier are resonant phase filters, or that this architecture beats transformers.
 
-It establishes four small numerical/algebraic facts in a transparent compartmental model:
+It now establishes six small numerical/algebraic facts in transparent compartmental toys:
 
-- repeated cable evolution selects slow modes;
+- repeated passive cable evolution selects slow modes;
 - continued forcing produces the same grounded fixed-point structure as the Sigh recursion;
 - morphologically different dendritic branches have temporal kernels that cannot be reduced to one scalar multiplier;
-- a local axial-conductance edit produces an exact global rank-one change in the continuous resolvent.
+- a local axial-conductance edit produces an exact global rank-one change in the continuous resolvent;
+- a delayed restorative active current turns the same branch into a stable frequency-selective operator;
+- two local voltage-dependent conductances make the instantaneous Jacobian state-dependent, so the same tiny probe can have a different global consequence.
 
-Those are enough to justify the next experiment.
+The missing step is still the hardest one: **persistent local write -> fast-state erasure -> changed later route**, preferably on the audited real morphology.
