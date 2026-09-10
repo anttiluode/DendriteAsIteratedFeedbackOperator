@@ -1,0 +1,51 @@
+{
+  "model": {
+    "compartments": 25,
+    "a_site": 22,
+    "write_site": 23,
+    "b_site": 24,
+    "separation": 15.0
+  },
+  "G9_threshold_free_write": {
+    "rule": "eta * integral(V_write^2) dt",
+    "eta": 30.0,
+    "delta_g_by_world": {
+      "W0": 0.0,
+      "WA": 0.03253313569030642,
+      "WB": 0.05221546263628517,
+      "WAB": 0.1752569908484714,
+      "Wsep": 0.13864231415912986,
+      "WBsep": 0.049473012603062645
+    },
+    "individual_A_write": 0.03253313569030642,
+    "individual_B_write": 0.05221546263628517,
+    "collision_specific_write_matched": 0.09050839252187982,
+    "collision_specific_write_separated": 0.056636165865760806,
+    "matched_over_separated_collision_write": 1.5980670855510075
+  },
+  "G9_after_fast_state_erasure": {
+    "recall_initial_fast_state": "exact zero in every world",
+    "recall_probe": "same passive unit-charge A cue in every world",
+    "matched_B_chi_norm": 0.019408828912561873,
+    "separated_B_chi_norm": 0.01234511204817841,
+    "matched_over_separated_B_chi_norm": 1.572187343202426,
+    "matched_B_chi_peak_abs": 0.006235874301324544,
+    "separated_B_chi_peak_abs": 0.00397432602046862,
+    "matched_over_separated_B_chi_peak": 1.56903944699264,
+    "matched_soma_chi_norm": 6.42534954686446e-05,
+    "separated_soma_chi_norm": 4.071743832027626e-05
+  },
+  "G9_eta_attack": {
+    "eta_values": [10.0, 20.0, 30.0, 50.0, 100.0],
+    "minimum_B_chi_selectivity": 1.572187343202426,
+    "maximum_B_chi_selectivity": 1.6183963245500002,
+    "rows": [
+      {"eta":10.0,"matched_chi_norm":0.009332314737978353,"separated_chi_norm":0.00590244135807738,"matched_over_separated_chi_norm":1.5810940205627382},
+      {"eta":20.0,"matched_chi_norm":0.015464930624106449,"separated_chi_norm":0.009830718216201332,"matched_over_separated_chi_norm":1.5731231720811363},
+      {"eta":30.0,"matched_chi_norm":0.019408828912561873,"separated_chi_norm":0.01234511204817841,"matched_over_separated_chi_norm":1.572187343202426},
+      {"eta":50.0,"matched_chi_norm":0.023161053761611105,"separated_chi_norm":0.014604824385157773,"matched_over_separated_chi_norm":1.5858495214190076},
+      {"eta":100.0,"matched_chi_norm":0.022289822286634235,"separated_chi_norm":0.013772783556482671,"matched_over_separated_chi_norm":1.6183963245500002}
+    ]
+  },
+  "interpretation": "Inclusion/exclusion is an analysis across counterfactual worlds, not a mechanism available to one neuron. It tests whether a persistent later response contains a component not explained by adding the two individual writes."
+}
