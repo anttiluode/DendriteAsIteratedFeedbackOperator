@@ -1,0 +1,45 @@
+{
+  "gate": 16,
+  "run_id": 34455757467,
+  "head_sha": "5cf0db9c1fc6c971f9c2af134cfb6aecc1c26a32",
+  "protocol": {
+    "widths_um": [2.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0],
+    "equal_budget_total_abs_cable_change_um": 0.2,
+    "observer_noise_fraction": 0.01,
+    "support_rule": "tip-anchored contiguous physical cable; no receipt selector",
+    "refine_factor": 2
+  },
+  "baseline_discretization_check": {
+    "omega_star_rad_s": 175.86867504846916,
+    "original_nodes": 12514,
+    "refined_nodes": 25027,
+    "original_path_length_um": 1242.169057660336,
+    "refined_path_length_um": 1242.1690576603364,
+    "path_length_relative_error": 3.6609135292984587e-16,
+    "target_gain_ratio_refined_over_original": 0.9933020093526443,
+    "five_tone_best_scalar_residual_refined_vs_original": 0.0008605494657781545,
+    "original_bounded_score": 61.44706969532572,
+    "refined_bounded_score": 61.67874587061113
+  },
+  "paired_curve": [
+    {"requested_width_um":2.0,"original_actual_width_um":2.504563886072064,"refined_actual_width_um":1.512280264569235,"original_support_nodes":2,"refined_support_nodes":3,"original_gamma_relative":0.0002906077920016994,"refined_gamma_relative":0.00029271695214471403,"gamma_ratio_refined_over_original":1.0072577549572461},
+    {"requested_width_um":4.0,"original_actual_width_um":3.229244042870109,"refined_actual_width_um":3.229244042870109,"original_support_nodes":3,"refined_support_nodes":6,"original_gamma_relative":0.00029039800679643064,"refined_gamma_relative":0.000292736448127706,"gamma_ratio_refined_over_original":1.0080525391929243},
+    {"requested_width_um":8.0,"original_actual_width_um":8.46052048480228,"refined_actual_width_um":8.46052048480228,"original_support_nodes":5,"refined_support_nodes":10,"original_gamma_relative":0.00029124798543584324,"refined_gamma_relative":0.0002931663043906904,"gamma_ratio_refined_over_original":1.0065865484081427},
+    {"requested_width_um":16.0,"original_actual_width_um":17.15024312442198,"refined_actual_width_um":15.781377339770424,"original_support_nodes":10,"refined_support_nodes":19,"original_gamma_relative":0.00029120231318451197,"refined_gamma_relative":0.0002931275036665413,"gamma_ratio_refined_over_original":1.0066111785341811},
+    {"requested_width_um":32.0,"original_actual_width_um":32.36512437051091,"refined_actual_width_um":32.36512437051091,"original_support_nodes":21,"refined_support_nodes":42,"original_gamma_relative":0.0002908790283200221,"refined_gamma_relative":0.00029298001864761235,"gamma_ratio_refined_over_original":1.0072229006667293},
+    {"requested_width_um":64.0,"original_actual_width_um":63.70799042551335,"refined_actual_width_um":63.70799042551335,"original_support_nodes":40,"refined_support_nodes":80,"original_gamma_relative":0.00029079556414919773,"refined_gamma_relative":0.0002929385188614036,"gamma_ratio_refined_over_original":1.0073692826727798},
+    {"requested_width_um":128.0,"original_actual_width_um":128.00461432831221,"refined_actual_width_um":128.00461432831221,"original_support_nodes":80,"refined_support_nodes":160,"original_gamma_relative":0.00029067337328579634,"refined_gamma_relative":0.0002928778107725913,"gamma_ratio_refined_over_original":1.007583898937408}
+  ],
+  "curve_agreement": {
+    "cosine": 0.9999998860572147,
+    "relative_l2_error": 0.0072556307612951475,
+    "all_original_best_directions": ["shorter","shorter","shorter","shorter","shorter","shorter","shorter"],
+    "all_refined_best_directions": ["shorter","shorter","shorter","shorter","shorter","shorter","shorter"]
+  },
+  "interpretation": {
+    "sharp_microscale_threshold_observed": false,
+    "response_is_nearly_flat_2_to_128_um": true,
+    "survives_2x_edge_refinement": true,
+    "summary": "With only 0.2 um total |Delta L|, tip-anchored supports from ~2 to 128 um all improve the bounded score by about 0.0291% in the original discretization and about 0.0293% after every morphology edge is subdivided in two. Curve cosine is 0.999999886 and relative L2 difference is 0.7256%. The hypothesized minimum coherent rewrite width is therefore not supported in this model; sensitivity extends to the single-edge scale and survives refinement."
+  }
+}
