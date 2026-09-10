@@ -21,3 +21,4 @@ jobs:
       - run: python gate7_slow_write.py
       - run: python gate8_attack.py
       - run: python gate9_causal_write.py
+      - run: python purifier_hotspot_probe.py
