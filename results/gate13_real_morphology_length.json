@@ -1,0 +1,133 @@
+{
+  "source": {
+    "repository": "ido4848/FCI",
+    "commit": "75ad8b4d81a7f51bf888b30650c543592340db06",
+    "path": "simulating_neurons/neuron_models/human/eyal/Human_L23_PC_0603_11_937_Eyal_passive_dends_simple_soma/morphologies/2013_03_06_cell11_1125_H41_06.asc",
+    "morphology_identifier": "1125",
+    "cell": "human L2/3 pyramidal morphology"
+  },
+  "real_morphology": {
+    "dendritic_nodes_including_soma_root": 12514,
+    "dendritic_edges": 12513,
+    "branch_nodes": 99,
+    "tips": 109,
+    "total_dendritic_cable_um": 20742.410466608977,
+    "selected_input_tip": 10532,
+    "selected_input_path_nodes": 750,
+    "selected_input_path_length_um": 1242.169057660336
+  },
+  "phenomenological_operator": {
+    "Ra_ohm_cm": 150.0,
+    "Cm_F_per_cm2": 1e-06,
+    "gleak_S_per_cm2": 0.0001,
+    "gq_S_per_cm2": 0.0015,
+    "tau_q_s": 0.05,
+    "omega_star_rad_s": 175.86867504846916,
+    "peak_is_interior_to_frequency_sweep": true,
+    "baseline_target_fraction": 0.9937649507008934,
+    "baseline_target_gain": 898305.8737733648,
+    "tones_rad_s": [
+      0.0,
+      61.554036266964204,
+      175.86867504846916,
+      439.6716876211729,
+      1055.212050290815
+    ]
+  },
+  "receipt_selected_geometry": {
+    "selection_rule": "max |forward_from_tip| * |reciprocal_return_from_AIS| on the real input path",
+    "parent_node": 10530,
+    "edit_node": 10531,
+    "baseline_segment_length_um": 1.9845672430056573,
+    "segment_radius_um": 0.7450000047683716,
+    "normalized_joint_overlap": 0.9986386249192277,
+    "not_selected_by_length_gradient": true
+  },
+  "purity_only": {
+    "fixed_point_scale": 5.0,
+    "fixed_point_is_interior": false,
+    "target_fraction": 0.993867383146847,
+    "target_gain_vs_baseline": 0.9853083410697346,
+    "walk_steps": 50
+  },
+  "grounded_bounded_observer": {
+    "score": "target_power / (off_target_power + observer_noise_floor)",
+    "rows": [
+      {
+        "observer_noise_fraction_of_baseline_target_power": 0.001,
+        "noise_floor_power": 806953442.8557284,
+        "fixed_point_scale": 5.0,
+        "fixed_point_length_um": 9.922836215028287,
+        "fixed_point_score": 138.8792120690816,
+        "fixed_point_is_interior": false,
+        "broad_best_scale": 5.0,
+        "broad_best_is_interior": false,
+        "target_fraction": 0.993867383146847,
+        "target_gain_vs_baseline": 0.9853083410697346,
+        "walk_steps": 50
+      },
+      {
+        "observer_noise_fraction_of_baseline_target_power": 0.003,
+        "noise_floor_power": 2420860328.5671854,
+        "fixed_point_scale": 5.0,
+        "fixed_point_length_um": 9.922836215028287,
+        "fixed_point_score": 107.98448945775452,
+        "fixed_point_is_interior": false,
+        "broad_best_scale": 5.0,
+        "broad_best_is_interior": false,
+        "target_fraction": 0.993867383146847,
+        "target_gain_vs_baseline": 0.9853083410697346,
+        "walk_steps": 50
+      },
+      {
+        "observer_noise_fraction_of_baseline_target_power": 0.01,
+        "noise_floor_power": 8069534428.557284,
+        "fixed_point_scale": 0.2,
+        "fixed_point_length_um": 0.3969134486011315,
+        "fixed_point_score": 61.58810422741014,
+        "fixed_point_is_interior": false,
+        "broad_best_scale": 0.2,
+        "broad_best_is_interior": false,
+        "target_fraction": 0.9937443647016037,
+        "target_gain_vs_baseline": 1.002918366783552,
+        "walk_steps": 50
+      },
+      {
+        "observer_noise_fraction_of_baseline_target_power": 0.03,
+        "noise_floor_power": 24208603285.671852,
+        "fixed_point_scale": 0.2,
+        "fixed_point_length_um": 0.3969134486011315,
+        "fixed_point_score": 27.68497454929568,
+        "fixed_point_is_interior": false,
+        "broad_best_scale": 0.2,
+        "broad_best_is_interior": false,
+        "target_fraction": 0.9937443647016037,
+        "target_gain_vs_baseline": 1.002918366783552,
+        "walk_steps": 50
+      },
+      {
+        "observer_noise_fraction_of_baseline_target_power": 0.1,
+        "noise_floor_power": 80695344285.57285,
+        "fixed_point_scale": 0.2,
+        "fixed_point_length_um": 0.3969134486011315,
+        "fixed_point_score": 9.459495189825628,
+        "fixed_point_is_interior": false,
+        "broad_best_scale": 0.2,
+        "broad_best_is_interior": false,
+        "target_fraction": 0.9937443647016037,
+        "target_gain_vs_baseline": 1.002918366783552,
+        "walk_steps": 50
+      }
+    ],
+    "reference_noise_fraction": 0.01,
+    "reference_fixed_point_scale": 0.2,
+    "reference_fixed_point_length_um": 0.3969134486011315
+  },
+  "operator_change_at_reference_length": {
+    "target_transfer_phase_shift_radians": 0.0001075095468852371,
+    "five_tone_best_scalar_residual": 0.00030471348057011194,
+    "interpretation": "A real segment-length edit changes the complex frequency response and is not generally equivalent to one scalar weight across the five tones."
+  },
+  "sigh_bridge": "The fixed point is defined at the structural level: shorter/current/longer is iterated until the bounded observer has no better neighbouring geometry. This is the geometry analogue of an invariant-state stopping condition, with an absolute observation floor preventing mode purity from being confused with useful transmission.",
+  "claim_boundary": "The morphology and segment metrics are real, but the membrane kinetics are a uniform phenomenological quasi-active model. A finite fixed point is task- and observer-relative. This does not show that biological dendrites execute this search, use this return signal, or grow to acoustic wavelengths."
+}
