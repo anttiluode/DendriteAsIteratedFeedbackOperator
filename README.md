@@ -1,8 +1,66 @@
 # Dendrite As Iterated Feedback Operator
 
-## Latest — Gate 11 closes the first biological-looking loop
+## Latest — Gate 12: a natural length appears only when the purifier is grounded
 
-The repo now goes beyond the isolated **eigenmode purifier** and connects it to an AIS-like event boundary, an event-conditioned return receipt, a local structural write, and replay after fast-state erasure.
+The growth intuition was: if dendritic geometry compiles the operator, perhaps a branch can change length until nearby length edits no longer improve the mode it delivers.
+
+The first Gate 12 run attacked that idea and found a better result.
+
+If the structural update maximizes **target-mode purity alone**, the segment grows all the way to the imposed upper bound. At scale `50`, the target fraction rises from `97.635%` to `98.456%` — but the target gain has collapsed to only `0.233%` of baseline.
+
+```text
+purity-only growth
+        -> longer and longer segment
+        -> weaker coupling
+        -> almost everything disappears
+        -> target fraction looks better
+```
+
+That is the geometric version of the old `SighImageSuper` trap:
+
+> **A mode can dominate because everything else died.**
+
+So Gate 12 grounds the geometry in a bounded observer with an absolute noise floor:
+
+```math
+Q_\sigma(L)=
+\frac{P_{\mathrm{target}}(L)}
+     {P_{\mathrm{off}}(L)+\sigma^2}.
+```
+
+Now near-isolation loses, because a vanishing target falls below the observer floor. A simple counted shorter/current/longer update reaches finite local fixed points for several observer floors:
+
+```text
+noise floor      fixed-point length scale
+0.1%             1.5333
+0.3%             1.0717
+1.0%             0.6231
+3.0%             0.2284
+10%              runs toward the minimum tested length
+```
+
+So the strongest current statement is **not** “dendrites have one natural resonant length.” It is:
+
+> **For a fixed target, morphology, membrane and bounded observer, geometry can have a task-relative fixed point where the local length operator stops changing.**
+
+At the 1% reference fixed point, the target transfer phase shifts by `0.1489 rad`; the five-tone response still leaves a `2.55%` residual after fitting the best possible single complex scalar. Length is changing the frequency-dependent operator, not merely a weight amplitude.
+
+The frozen GitHub Actions receipt is [`results/gate12_natural_length.json`](results/gate12_natural_length.json). Full derivation, failure mode and claim boundary: [`GATE12_NATURAL_LENGTH.md`](GATE12_NATURAL_LENGTH.md).
+
+The Sigh-style fixed-point analogy is now explicit:
+
+```text
+state fixed point:      x* = F(x*)
+structure fixed point:  L* = G_sigma(L*)
+```
+
+The first is a fixed state under an operator. The second is a fixed **operator geometry** under a bounded consequence rule.
+
+---
+
+## Gate 11 closes the first biological-looking loop
+
+The repo goes beyond the isolated **eigenmode purifier** and connects it to an AIS-like event boundary, an event-conditioned return receipt, a local structural write, and replay after fast-state erasure.
 
 ```text
 PURIFY
@@ -254,7 +312,7 @@ many spatial modes
     -> slowest mode remains last
 ```
 
-Gate 5 moves to the more interesting object:
+Gate 5 moved to the more interesting object:
 
 ```text
 mixed temporal modes
@@ -263,7 +321,7 @@ mixed temporal modes
     -> bounded soma sees a purified answer
 ```
 
-That is much closer to the Berglund visual intuition: geometry/material constraints determine **which global response is easy for the system to support**.
+Gate 12 adds the missing grounding lesson: **modal purity alone is not enough if the selected signal has become too small to recover.**
 
 The crucial distinction is that we are not storing the selected waveform as a template.
 
@@ -273,42 +331,21 @@ The structure makes that response natural.
 
 Or in the language recurring across the repos:
 
-> **Structure compiles the operator; the operator decides which modes can live.**
+> **Structure compiles the operator; the operator decides which modes can live; the bounded observer decides which surviving modes are still useful.**
 
 ---
 
 # Earlier gates
 
-The current repo still preserves the passive controls because they tell us exactly what Gate 5 added.
+The repo preserves the passive controls because they tell us exactly what the active gates added.
 
 ## G0 — stable recurrent cable
 
-A 25-compartment Y cable has passive step spectral radius
-
-```text
-0.9791865
-```
-
-so every autonomous passive mode decays.
+A 25-compartment Y cable has passive step spectral radius `0.9791865`, so every autonomous passive mode decays.
 
 ## G1 — passive Sigh-style mode selection
 
-A distal pulse begins with modal effective dimension
-
-```text
-10.005
-```
-
-and falls under silent iteration to
-
-```text
-step 20    3.741
-step 80    2.830
-step 240   1.514
-step 600   1.019
-```
-
-with late absolute cosine `0.99863` to the slowest passive mode.
+A distal pulse begins with modal effective dimension `10.005` and falls under silent iteration to `3.741 -> 2.830 -> 1.514 -> 1.019`, with late absolute cosine `0.99863` to the slowest passive mode.
 
 Useful control; not yet a resonant purifier.
 
@@ -326,20 +363,11 @@ has fixed point
 V^*=\alpha[I-(1-\alpha)P]^{-1}q.
 ```
 
-The numerical error is about `1.1e-15`. Two distal cues have nearly orthogonal grounded fixed points (`cos ~1.84e-6`) but converge toward the same passive late mode after forcing is removed (`cos ~0.99909`).
+Two distal cues have nearly orthogonal grounded fixed points but converge toward the same passive late mode after forcing is removed.
 
 ## G3 — branch != scalar weight
 
-Equal charge injected into the two distal tips yields soma kernels peaking at different times:
-
-```text
-branch A: step 79
-branch B: step 93
-```
-
-After fitting the best scalar multiplier, `18.23%` of one waveform remains unexplained.
-
-A branch therefore carries delay/filter geometry that a scalar weight cannot represent.
+Equal charge injected into the two distal tips yields soma kernels peaking at different times (`79` versus `93` steps). After fitting the best scalar multiplier, `18.23%` of one waveform remains unexplained.
 
 ## G4 — one axial edit -> rank-one global resolvent edit
 
@@ -361,21 +389,14 @@ The numerical effective rank is exactly `1.0` to roundoff.
 
 ---
 
-# What Gemini's stronger picture gets right — and what still needs testing
-
-The useful criticism of the passive version was correct:
-
-> **A passive RC cable only proves diffusive spectral decay. It does not demonstrate selective non-zero resonance.**
-
-Gate 5 fixes that.
-
-A few stronger statements should still remain hypotheses rather than conclusions:
+# What still needs testing
 
 - Active conductances can generate resonance and complex poles without making the dendrite literally a hyperbolic acoustic waveguide.
-- NMDA gives voltage-dependent cooperative nonlinearity, but whether it sharpens *the particular resonant mode selected by the branch* must be measured rather than assumed.
-- Branch points and spine necks create impedance filtering, but ordinary dendrite theory does not imply that every neck is a cavity-style tunneling resonator.
+- NMDA gives voltage-dependent cooperative nonlinearity, but whether it sharpens the particular resonant mode selected by the branch must be measured rather than assumed.
+- Branch points and spine necks create impedance filtering, but ordinary dendrite theory does not imply every neck is a cavity-style tunneling resonator.
 - The Gate 11 return receipt is history-conditioned because the event changes channel state; it is not an exact adjoint.
 - A receipt is not enough for learning: persistent consolidation requires a slower write rule and a separate permission/consequence condition.
+- Gate 12 natural length is task- and observer-relative; it is not a universal biological preferred length.
 
 The right thing is therefore not to retreat from the eigenmode-purifier thought. It is to **make each stronger part executable and attack it with controls.**
 
@@ -383,13 +404,13 @@ The right thing is therefore not to retreat from the eigenmode-purifier thought.
 
 # Next gates
 
-The first closed loop now exists. The next attacks should make it less engineered:
+The most important next step is now geometric rather than another scalar write:
 
-1. replace the Gate 11 event-state switch with a dynamical AIS spike and measure the time-domain bAP waveform;
-2. compare basket-like somatic shunt with chandelier-like distal-AIS shunt under equal conductance budget;
-3. replace the consolidation-permission bit with delayed failure/relevance and attack unconditional reinforcement;
-4. stream many events and measure when local low-rank edits remain additive versus interfere;
-5. transfer the closed loop to the audited Operaattori reconstruction.
+1. transfer the Gate 12 length/diameter objective to the audited Operaattori morphology, where geometry is real rather than a toy scale factor;
+2. use the Gate 11 receipt to propose shorter/longer/thinner/thicker edits, but keep only edits that improve a later bounded replay;
+3. replace the Gate 11 event-state switch with a dynamical AIS spike and measure the time-domain bAP waveform;
+4. stream many structural writes and measure when local geometry edits remain compatible versus interfere;
+5. compare dendritic input-geometry learning with axonal delay/length learning as two sides of the AIS boundary.
 
 ---
 
@@ -401,11 +422,12 @@ pytest -q
 python experiment.py
 python active_experiment.py
 python gate11_ais_receipt.py
+python gate12_natural_length.py
 ```
 
 CI runs the full gate sequence on Python 3.10 and 3.12.
 
-See [`THEORY.md`](THEORY.md), [`PURIFIER_CAUSALITY.md`](PURIFIER_CAUSALITY.md), and [`GATE11_AIS_RECEIPT.md`](GATE11_AIS_RECEIPT.md) for equations and claim boundaries.
+See [`THEORY.md`](THEORY.md), [`PURIFIER_CAUSALITY.md`](PURIFIER_CAUSALITY.md), [`GATE11_AIS_RECEIPT.md`](GATE11_AIS_RECEIPT.md), and [`GATE12_NATURAL_LENGTH.md`](GATE12_NATURAL_LENGTH.md) for equations and claim boundaries.
 
 ---
 
@@ -419,17 +441,16 @@ Established by the numerical toys in this repo:
 - one local passive edge edit creates an exact rank-one global resolvent edit;
 - a restorative quasi-active extension creates stable complex poles and non-zero distal-to-soma pass bands;
 - from five equal-energy input tones, the chosen resonant component can dominate the soma/AIS output at about `96-98%` in deliberately tuned toys;
-- one local active-conductance or axial-conductance edit can make a distributed rank-one transfer edit at fixed frequency;
-- Gate 11 verifies reciprocal small-signal forward/reverse transfer, a distinct event-conditioned return through a changed fast conductance state, local receipt/eligibility-gated persistent writing, and changed replay after fast-state erasure.
+- Gate 11 verifies reciprocal small-signal forward/reverse transfer, a distinct event-conditioned return through a changed fast conductance state, local receipt/eligibility-gated persistent writing, and changed replay after fast-state erasure;
+- Gate 12 shows that length edits change the complex transfer non-scalarly, that purity-only growth falls into an isolation/silence trap, and that an explicit bounded-observer floor can create finite local geometry fixed points.
 
 Not established:
 
 - that real dendrites routinely achieve this degree of purification;
 - that HCN alone implements the exact toy parameters;
 - that biological dendrites are acoustic/RF waveguides;
-- that NMDA automatically performs mode competition;
 - that biological bAPs compute an adjoint, error gradient, or exact credit assignment signal;
-- that chandelier cells implement the consolidation gate;
+- that dendrites literally implement the Gate 12 search rule or grow to resonant wavelengths;
 - that the mechanism gives useful learning, hardware efficiency, transformer equivalence, or brain-level computation.
 
 Those are now experiments rather than metaphors.
