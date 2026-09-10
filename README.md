@@ -1,6 +1,56 @@
 # Dendrite As Iterated Feedback Operator
 
-This repo started with a cautious bridge from `SighImageSuper` to passive cable theory. Gate 5 now tests the stronger picture directly:
+## Latest — Gate 11 closes the first biological-looking loop
+
+The repo now goes beyond the isolated **eigenmode purifier** and connects it to an AIS-like event boundary, an event-conditioned return receipt, a local structural write, and replay after fast-state erasure.
+
+```text
+PURIFY
+mixed temporal cue -> branch-selected non-zero mode
+
+COMMIT
+purified state reaches an AIS-like boundary event
+
+RETURN
+post-event state sends an AIS-originating receipt back through the same morphology
+
+BIND / WRITE
+local forward eligibility × local receipt × consolidation permission
+        -> one persistent local conductance edit
+
+REPLAY
+erase fast state exactly
+        -> same cue sees the changed operator
+```
+
+The first frozen GitHub Actions receipt is [`results/gate11_ais_receipt.json`](results/gate11_ais_receipt.json); the full mechanism and claim boundary are in [`GATE11_AIS_RECEIPT.md`](GATE11_AIS_RECEIPT.md).
+
+First deterministic numbers:
+
+```text
+input target-mode energy                    20.00%
+AIS target-mode fraction after purifier     97.64%
+small-signal reciprocity error              1.76e-16
+post-event return / small-return change     77.63%
+local write Delta g                         1.576e-3
+Delta H s2 / s1                             2.43e-12
+same-cue AIS gain change after fast wipe    2.99e-4 relative
+no-write-permission operator change         0
+```
+
+The important correction is explicit:
+
+> **The receipt is not learning.**
+
+The frozen pre-event and post-event operators are each reciprocal. The forward cue and return event differ because they occur in different channel states. Learning happens only when the local receipt meets local forward eligibility *and* a separate consolidation-permission signal, producing a slower persistent operator edit.
+
+This is not a fitted AIS/bAP/STDP model and it does not claim biological backpropagation computes an adjoint or gradient. It is the first executable version here of:
+
+> **PURIFY -> COMMIT -> RETURN CONSEQUENCE -> WRITE -> NEXT INPUT SEES A DIFFERENT OPERATOR.**
+
+---
+
+This repo started with a cautious bridge from `SighImageSuper` to passive cable theory. Gate 5 tests the stronger purifier picture directly:
 
 > **Can a dendritic branch behave as an eigenmode purifier: taking a mixed temporal signal, rejecting most components, and delivering a branch-selected non-zero mode to a bounded soma readout?**
 
@@ -22,7 +72,7 @@ The passive cable remains the control. The new active model is a phenomenologica
 
 ---
 
-# Latest result — Gate 5: non-zero mode purification
+# Gate 5 — non-zero mode purification
 
 The active branch adds one restorative state `z` per dendritic compartment:
 
@@ -127,7 +177,7 @@ selected non-zero mode dominates the bounded output
 
 That is why the repo now uses **eigenmode purifier** as an operational hypothesis rather than as a metaphor.
 
-Important: this is still linear resonant filtering. No information is created and no nonlinear winner-take-all process is implied. The next gate asks whether voltage-dependent coincidence can turn this from a fixed resonant sieve into a **state-dependent** one.
+Important: this is still linear resonant filtering. No information is created and no nonlinear winner-take-all process is implied.
 
 ## Complex poles are actually present
 
@@ -324,6 +374,8 @@ A few stronger statements should still remain hypotheses rather than conclusions
 - Active conductances can generate resonance and complex poles without making the dendrite literally a hyperbolic acoustic waveguide.
 - NMDA gives voltage-dependent cooperative nonlinearity, but whether it sharpens *the particular resonant mode selected by the branch* must be measured rather than assumed.
 - Branch points and spine necks create impedance filtering, but ordinary dendrite theory does not imply that every neck is a cavity-style tunneling resonator.
+- The Gate 11 return receipt is history-conditioned because the event changes channel state; it is not an exact adjoint.
+- A receipt is not enough for learning: persistent consolidation requires a slower write rule and a separate permission/consequence condition.
 
 The right thing is therefore not to retreat from the eigenmode-purifier thought. It is to **make each stronger part executable and attack it with controls.**
 
@@ -331,59 +383,13 @@ The right thing is therefore not to retreat from the eigenmode-purifier thought.
 
 # Next gates
 
-## Gate 6 — nonlinear resonant sieve
+The first closed loop now exists. The next attacks should make it less engineered:
 
-Put a local voltage-dependent coincidence element on the already-resonant branch.
-
-Compare equal total input energy under:
-
-```text
-matched carrier + matched timing
-matched carrier + wrong timing
-wrong carrier + matched timing
-spatially separated inputs
-single-input controls
-```
-
-Measure whether the nonlinear residual is selectively largest when activity occupies the branch's own resonant pass band.
-
-The important question is not merely "does NMDA make a bigger voltage?" It is:
-
-> **Does local nonlinearity preferentially amplify the mode the distributed branch operator already selected?**
-
-## Gate 7 — state-dependent Jacobian
-
-Linearize before and during the nonlinear event:
-
-```math
-J(x,\theta)=\partial F/\partial x.
-```
-
-Then ask whether the selected mode changes the operator that selects the next mode.
-
-## Gate 8 — slow write
-
-Let successful coincidence alter one local conductance, erase fast state, and replay the identical broadband cue.
-
-The target loop becomes:
-
-```text
-mode selected
-    -> local nonlinear encounter
-    -> local material edit
-    -> global frequency-dependent resolvent changes
-    -> future mode selection changes
-```
-
-That would be the dendritic analogue of the direct-fluid machine:
-
-```text
-wave -> encounter -> changed medium -> next wave travels differently
-```
-
-## Gate 9 — real Operaattori morphology
-
-Transfer the whole experiment to the audited reconstructed morphology. The decisive test is whether real local length/diameter/conductance changes produce low-dimensional but global changes in **frequency-dependent** transfer and whether different real branches purify different temporal modes.
+1. replace the Gate 11 event-state switch with a dynamical AIS spike and measure the time-domain bAP waveform;
+2. compare basket-like somatic shunt with chandelier-like distal-AIS shunt under equal conductance budget;
+3. replace the consolidation-permission bit with delayed failure/relevance and attack unconditional reinforcement;
+4. stream many events and measure when local low-rank edits remain additive versus interfere;
+5. transfer the closed loop to the audited Operaattori reconstruction.
 
 ---
 
@@ -394,25 +400,27 @@ python -m pip install -e .[dev]
 pytest -q
 python experiment.py
 python active_experiment.py
+python gate11_ais_receipt.py
 ```
 
-CI runs all of these on Python 3.10 and 3.12.
+CI runs the full gate sequence on Python 3.10 and 3.12.
 
-See [`THEORY.md`](THEORY.md) for the equations and claim boundaries.
+See [`THEORY.md`](THEORY.md), [`PURIFIER_CAUSALITY.md`](PURIFIER_CAUSALITY.md), and [`GATE11_AIS_RECEIPT.md`](GATE11_AIS_RECEIPT.md) for equations and claim boundaries.
 
 ---
 
 ## Claim boundary
 
-Established by this numerical toy:
+Established by the numerical toys in this repo:
 
 - passive cable evolution performs diffusive modal selection;
 - continued forcing gives a cue-specific resolvent response;
 - different branches have non-scalar temporal kernels;
 - one local passive edge edit creates an exact rank-one global resolvent edit;
 - a restorative quasi-active extension creates stable complex poles and non-zero distal-to-soma pass bands;
-- from five equal-energy input tones, the chosen resonant component can dominate the soma output at about `96-98%` in this deliberately tuned toy;
-- one local active-conductance edit still makes a global rank-one transfer edit at fixed frequency.
+- from five equal-energy input tones, the chosen resonant component can dominate the soma/AIS output at about `96-98%` in deliberately tuned toys;
+- one local active-conductance or axial-conductance edit can make a distributed rank-one transfer edit at fixed frequency;
+- Gate 11 verifies reciprocal small-signal forward/reverse transfer, a distinct event-conditioned return through a changed fast conductance state, local receipt/eligibility-gated persistent writing, and changed replay after fast-state erasure.
 
 Not established:
 
@@ -420,6 +428,8 @@ Not established:
 - that HCN alone implements the exact toy parameters;
 - that biological dendrites are acoustic/RF waveguides;
 - that NMDA automatically performs mode competition;
+- that biological bAPs compute an adjoint, error gradient, or exact credit assignment signal;
+- that chandelier cells implement the consolidation gate;
 - that the mechanism gives useful learning, hardware efficiency, transformer equivalence, or brain-level computation.
 
 Those are now experiments rather than metaphors.
