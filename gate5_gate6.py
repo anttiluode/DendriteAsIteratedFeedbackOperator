@@ -141,4 +141,4 @@ if __name__ == "__main__":
     print(json.dumps(result, indent=2))
     out = Path("results")
     out.mkdir(exist_ok=True)
-    (out / "active_receipt.json").write_text(json.dumps(result, indent=2) + "\n")
+    (out / "gate5_gate6_receipt.json").write_text(json.dumps(result, indent=2) + "\n")
