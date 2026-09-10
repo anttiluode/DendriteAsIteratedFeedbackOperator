@@ -1,0 +1,35 @@
+{
+  "question": "Does Gate-5 temporal-mode purification exist along the dendritic branch itself, or only at the soma readout?",
+  "protocol": {
+    "input_tip": 12,
+    "branch": "A",
+    "tones_per_site": "[0.35*w_peak, 0.60*w_peak, w_peak, 2.5*w_peak, 6.0*w_peak]",
+    "target_input_energy_fraction": 0.2,
+    "dc_excluded": true,
+    "nonlinear_threshold_fitted": false
+  },
+  "rows": [
+    {"site":1,"distance_from_soma_index":1,"peak_omega":0.1336214434313758,"active_target_fraction":0.8374099845942934,"passive_target_fraction":0.03911349614221776,"active_over_passive_purity":21.409745156747107,"active_total_gain_power":0.001937563244189446,"passive_total_gain_power":0.02677459477888387},
+    {"site":2,"distance_from_soma_index":2,"peak_omega":0.13501497858060438,"active_target_fraction":0.8334689149044847,"passive_target_fraction":0.04730857846981956,"active_over_passive_purity":17.617712090761614,"active_total_gain_power":0.004582125103503836,"passive_total_gain_power":0.047983287443511866},
+    {"site":3,"distance_from_soma_index":3,"peak_omega":0.13501497858060438,"active_target_fraction":0.8210881939711345,"passive_target_fraction":0.05499314977281194,"active_over_passive_purity":14.93073587098065,"active_total_gain_power":0.01035935420201487,"passive_total_gain_power":0.08866629686836146},
+    {"site":4,"distance_from_soma_index":4,"peak_omega":0.1336214434313758,"active_target_fraction":0.8046348916187841,"passive_target_fraction":0.06357830222454594,"active_over_passive_purity":12.655809662500477,"active_total_gain_power":0.022802615718316526,"passive_total_gain_power":0.16703060617653082},
+    {"site":5,"distance_from_soma_index":5,"peak_omega":0.1336214434313758,"active_target_fraction":0.7741036735635373,"passive_target_fraction":0.07186206217438468,"active_over_passive_purity":10.772077089647832,"active_total_gain_power":0.050316180009707945,"passive_total_gain_power":0.3087082945647598},
+    {"site":6,"distance_from_soma_index":6,"peak_omega":0.13224229142861396,"active_target_fraction":0.7422503325856012,"passive_target_fraction":0.08220071598782705,"active_over_passive_purity":9.02973074705967,"active_total_gain_power":0.1105893632588061,"passive_total_gain_power":0.5799311241420573},
+    {"site":7,"distance_from_soma_index":7,"peak_omega":0.1295265445814967,"active_target_fraction":0.7084394667654377,"passive_target_fraction":0.0947400143136144,"active_over_passive_purity":7.477721762003503,"active_total_gain_power":0.24363400357039333,"passive_total_gain_power":1.1051728771820672},
+    {"site":8,"distance_from_soma_index":8,"peak_omega":0.12818965741142108,"active_target_fraction":0.6626933529141119,"passive_target_fraction":0.10731264637319271,"active_over_passive_purity":6.175351883593622,"active_total_gain_power":0.548066363778732,"passive_total_gain_power":2.0738951461259174},
+    {"site":9,"distance_from_soma_index":9,"peak_omega":0.12555713604335303,"active_target_fraction":0.6143624339538605,"passive_target_fraction":0.12178711707961476,"active_over_passive_purity":5.04456012003502,"active_total_gain_power":1.2475322164978007,"passive_total_gain_power":3.948587168866413},
+    {"site":10,"distance_from_soma_index":10,"peak_omega":0.1229786765153216,"active_target_fraction":0.55925167554206,"passive_target_fraction":0.13675753982928704,"active_over_passive_purity":4.0893663065317485,"active_total_gain_power":2.9059190933112853,"passive_total_gain_power":7.525211252591057},
+    {"site":11,"distance_from_soma_index":11,"peak_omega":0.11797952489194072,"active_target_fraction":0.5025311003285086,"passive_target_fraction":0.1532071476038856,"active_over_passive_purity":3.2800760812269276,"active_total_gain_power":6.909747097673954,"passive_total_gain_power":14.694880488617658},
+    {"site":12,"distance_from_soma_index":12,"peak_omega":0.11318359156348469,"active_target_fraction":0.439680964420386,"passive_target_fraction":0.16812225698660505,"active_over_passive_purity":2.615245430921244,"active_total_gain_power":17.06425922915554,"passive_total_gain_power":28.747397394161244}
+  ],
+  "summary": {
+    "target_fraction_at_distal_tip_active": 0.439680964420386,
+    "target_fraction_at_proximal_branch_active": 0.8374099845942934,
+    "target_fraction_at_distal_tip_passive": 0.16812225698660505,
+    "target_fraction_at_proximal_branch_passive": 0.03911349614221776,
+    "active_proximal_purity_over_input": 4.187049922971467,
+    "active_proximal_purity_over_passive": 21.409745156747107,
+    "observation": "The target-mode fraction increases as the active signal travels from distal tip toward soma, while the matched passive cable becomes progressively less target-selective over the same non-DC tone family.",
+    "important_counterpoint": "Passive total gain power is larger at every sampled site. The active branch is acting as a selective rejector/purifier, not as a broadband amplifier."
+  }
+}
