@@ -1,0 +1,42 @@
+{
+  "model": {
+    "compartments": 25,
+    "branch_len": 12
+  },
+  "G5_active_frequency_selective_operator": {
+    "active_sites": [
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "g_r": 0.2,
+    "tau": 20.0,
+    "passive_peak_omega": 0.0,
+    "passive_peak_over_dc": 1.0,
+    "active_peak_omega": 0.0790895532301332,
+    "active_peak_over_dc": 2.596565913780184,
+    "active_max_pole_real_part": -0.043404768297671675,
+    "number_of_complex_poles": 6,
+    "largest_complex_pole_imag_abs": 0.08171804871699304
+  },
+  "G6_nmda_state_dependent_operator": {
+    "a_site": 22,
+    "b_site": 24,
+    "matched_interaction_norm": 0.00010826808279550266,
+    "separated_interaction_norm": 5.0324237506915056e-05,
+    "matched_over_separated": 2.1514102976846003,
+    "matched_peak_abs_residual": 5.591182919166042e-06,
+    "separated_peak_abs_residual": 4.088863363566619e-06,
+    "jacobian_eval_time": 8.0,
+    "same_gate_state_vs_zero_deltaJ_norm": 0.01077702443726968,
+    "same_gate_state_vs_zero_deltaJ_rank": 2,
+    "instantaneous_B_probe_transfer_zero_state": 0.14520499331147796,
+    "instantaneous_B_probe_transfer_AB_state": 0.17131618329579304,
+    "state_over_zero_probe_transfer": 1.1798229481565017,
+    "max_real_jacobian_eigenvalue_over_AB_run": -0.012986248155095335,
+    "locally_stable_in_this_run": true
+  }
+}
