@@ -46,7 +46,7 @@ so the voltage transfer is
 H(\omega)=
 \left[
 G+i\omega C+
-\operatorname{diag}Y_q(\omega)
+\mathrm{diag}\,Y_q(\omega)
 \right]^{-1}.
 ```
 
