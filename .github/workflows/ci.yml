@@ -16,3 +16,4 @@ jobs:
       - run: python -m pip install -e .[dev]
       - run: pytest -q
       - run: python experiment.py
+      - run: python active_experiment.py

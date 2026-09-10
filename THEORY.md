@@ -40,6 +40,8 @@ Modes with larger `lambda_k` disappear faster. Normalized late state tends towar
 
 This is exactly the spectral-selection logic of the original recursive image loop, but with a cable generator rather than an FFT filter.
 
+That passive result is a **control**, not yet the interesting "eigenmode purifier" claim. It is diffusive forgetting: all autonomous poles are real and the eventual normalized state is the slowest decaying direction.
+
 ## 3. Grounded recursion is a resolvent
 
 For
@@ -163,3 +165,97 @@ wave -> nonlinear encounter -> changed material -> future wave travels different
 ```
 
 and the dendritic loop become mathematically comparable without asserting they are physically the same substrate.
+
+## 7. Gate 5: the stronger "eigenmode purifier" object
+
+The first repo version stopped at passive spectral decay. Gate 5 deliberately asks the stronger question.
+
+Attach one restorative quasi-active state `z` to each dendritic compartment:
+
+```math
+C\dot V=-GV-g_q z+I,
+```
+
+```math
+\tau_q \dot z=V-z.
+```
+
+For sinusoidal drive, eliminating `z` gives the frequency-dependent local admittance
+
+```math
+Y_q(\omega)=\frac{g_q}{1+i\omega\tau_q},
+```
+
+and therefore
+
+```math
+H(\omega)=
+\left[
+G+i\omega C+
+\operatorname{diag}Y_q(\omega)
+\right]^{-1}.
+```
+
+This is intentionally phenomenological. It is a quasi-active restorative current, not a fitted HCN channel and not a claim that the cable equation has literally become an acoustic wave equation.
+
+But mathematically it crosses the line the passive control could not cross: the enlarged state operator acquires stable complex poles and the distal-to-soma transfer can peak at a **non-zero** temporal frequency.
+
+The GitHub CI receipt gives:
+
+```text
+passive branch A peak: omega = 0
+passive branch B peak: omega = 0
+
+active branch A peak: omega = 0.12556   peak/DC = 29.91x
+active branch B peak: omega = 0.06808   peak/DC = 34.31x
+peak-frequency ratio A/B = 1.844x
+complex poles = 12
+max real pole part = -0.02544  (stable)
+```
+
+So the two dendritic branches are no longer merely two differently blurred low-pass kernels. They are two differently tuned temporal operators.
+
+The operational purification test is deliberately simple. Feed five equal-energy temporal components into a distal tip. The target resonant component begins with only `20%` of input energy. At the soma:
+
+```text
+branch A target fraction -> 97.61%
+branch B target fraction -> 96.03%
+```
+
+For the matched passive cable the same target frequencies account for only `0.64%` and `4.36%` respectively.
+
+That justifies a precise use of the word **purifier** in this toy:
+
+> **A distributed dendritic operator can enrich one non-zero temporal mode from a broadband/equal-tone input while rejecting other components before the bounded soma readout.**
+
+Nothing nonlinear is required for that first meaning; ordinary resonant filtering is enough. Nonlinearity becomes essential for the stronger next claim: state-dependent competition, coincidence-triggered gain, switching, and persistent operator rewriting.
+
+There is also a useful structural continuation of Gate 4. At fixed `omega`, changing one local quasi-active conductance changes one diagonal admittance direction. The global transfer update remains numerically rank one:
+
+```text
+Delta H effective rank = 1.0000000000009
+s2 / s1 = 1.05e-14
+23.52% of global entries exceed 2% of peak change
+```
+
+So active resonance does not destroy the old local-edit/global-operator algebra. It makes it frequency-selective.
+
+The stronger architecture is therefore now:
+
+```text
+local morphology + membrane kinetics
+        ->
+frequency-dependent global resolvent
+        ->
+non-zero mode selection / purification
+        ->
+local nonlinear coincidence
+        ->
+state-dependent Jacobian
+        ->
+slow structural edit
+        ->
+new future resolvent
+```
+
+That is substantially closer to the original Sigh/Berglund intuition than passive electrotonic decay alone.
