@@ -1,0 +1,79 @@
+{
+  "model": {
+    "target_branch_peak_omega": 0.12555713604335303,
+    "hotspot": 3,
+    "same_branch_sites": [12, 8],
+    "separated_control_site": 24,
+    "relative_input_amplitudes": [1.0, 0.32917828063903964],
+    "drive_scale": 0.44337199335776495,
+    "regenerative_knee": 0.06,
+    "regenerative_slope": 0.003,
+    "regenerative_Imax": 0.018,
+    "note": "bounded generic regenerative hotspot; not an NMDA kinetic fit"
+  },
+  "cases": {
+    "matched": {
+      "linear_hotspot_peak": 0.08000000005774348,
+      "linear_hotspot_threshold_occupancy": 0.46053946053946054,
+      "nonlinear_hotspot_peak": 0.11161506371489623,
+      "linear_soma_rms": 0.010528364772238188,
+      "nonlinear_soma_rms": 0.01466715021926827,
+      "nonlinear_residual_soma_rms": 0.00420393337888286,
+      "residual_over_linear_soma": 0.3992959466951638
+    },
+    "quadrature": {
+      "linear_hotspot_peak": 0.05656853990966142,
+      "linear_hotspot_threshold_occupancy": 0.0,
+      "nonlinear_residual_soma_rms": 0.002881051128006917,
+      "residual_over_linear_soma": 0.38701041413419324
+    },
+    "antiphase": {
+      "linear_hotspot_peak": 2.4015418958214614e-10,
+      "nonlinear_residual_soma_rms": 4.157761592355631e-20
+    },
+    "wrong_low_carrier": {
+      "omega": 0.04394499761517356,
+      "linear_hotspot_peak": 0.013682375340426756,
+      "nonlinear_residual_soma_rms": 1.256426067089162e-10
+    },
+    "wrong_high_carrier": {
+      "omega": 0.3138928401083826,
+      "linear_hotspot_peak": 0.021468772004370505,
+      "nonlinear_residual_soma_rms": 6.933451752762077e-10
+    },
+    "spatially_separated": {
+      "linear_hotspot_peak": 0.04022547168231843,
+      "nonlinear_residual_soma_rms": 1.5992086267365733e-06
+    },
+    "single_A": {
+      "linear_hotspot_peak": 0.04000000002544768,
+      "nonlinear_residual_soma_rms": 1.4808544503243349e-06
+    },
+    "single_B": {
+      "linear_hotspot_peak": 0.040000000032295806,
+      "nonlinear_residual_soma_rms": 1.4808544536202718e-06
+    }
+  },
+  "summary": {
+    "matched_residual_soma_rms": 0.00420393337888286,
+    "largest_control_residual_soma_rms": 0.002881051128006917,
+    "largest_control": "quadrature",
+    "matched_over_largest_control": 1.4591665305818782,
+    "matched_over_quadrature": 1.4591665305818782,
+    "matched_over_offband": 6063261.891464292,
+    "matched_over_spatial_separation": 2628.7585675807795,
+    "matched_over_largest_single": 2838.8565592016334,
+    "warning": "Huge ratios against off-band, separated, and single controls are strongly influenced by the deliberately placed nonlinear knee and phase/amplitude calibration. The quadrature comparison is the harder control."
+  },
+  "verdict": {
+    "matched_linear_hotspot_crosses_knee": true,
+    "single_A_stays_below_knee": true,
+    "single_B_stays_below_knee": true,
+    "matched_beats_quadrature": true,
+    "matched_beats_antiphase": true,
+    "matched_beats_offband": true,
+    "matched_beats_spatial_separation": true,
+    "matched_beats_singles": true,
+    "passes": true
+  }
+}
